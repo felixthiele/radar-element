@@ -1,26 +1,63 @@
-import { html, css, LitElement, property } from 'lit-element';
+import {css, html, LitElement, property} from 'lit-element';
+
+import {translate} from "./utils/html.utils";
+import {generateGrid} from "./GridHtml.js";
+import {computeDefaultRadius, Ring} from "./domain/ring.js";
+
+interface RingConfig {
+  name: string;
+  backgroundColor: string;
+}
 
 export class RadarElement extends LitElement {
   static styles = css`
     :host {
       display: block;
-      padding: 25px;
-      color: var(--radar-element-text-color, #000);
+    }
+
+    svg {
+      background-color: var(--radar-element-background-color, #fff)
     }
   `;
 
-  @property({ type: String }) title = 'Hey there';
+  /**
+   * The diameter the radar should have.
+   */
+  @property() diameter = 0;
 
-  @property({ type: Number }) counter = 5;
+  /**
+   * The configuration for the rings of the radar.
+   */
+  @property({type: Array}) ringConfig: Array<RingConfig> = [];
 
-  __increment() {
-    this.counter += 1;
-  }
+  private rings: Ring[] = [];
 
   render() {
+    this.ringConfig.forEach((config, index) => {
+      const ring: Ring = {
+        ...config,
+        index,
+        radius: computeDefaultRadius(
+          this.diameter,
+          this.ringConfig.length,
+          index
+        ),
+      };
+
+      if (index > 0) {
+        ring.previousRing = this.rings[index - 1];
+      }
+
+      this.rings.push(ring);
+    })
+
     return html`
-      <h2>${this.title} Nr. ${this.counter}!</h2>
-      <button @click=${this.__increment}>increment</button>
+      <svg width="${this.diameter}" height="${this.diameter}">
+        <g id="center" transform="${translate(this.diameter / 2, this.diameter / 2)}">
+          ${generateGrid(this.rings)}
+        </g>
+      </svg>
     `;
   }
+
 }

@@ -15,12 +15,28 @@
     import { html, render } from 'lit-html';
     import '../dist/radar-element.js';
 
-    const title = 'Hello owc World!';
+    const rings = [
+      {
+        name: "ADOPT",
+        backgroundColor: "#841339",
+      },
+      {
+        name: "TRIAL",
+        backgroundColor: "#B1B2B1",
+      },
+      {
+        name: "ASSESS",
+        backgroundColor: "#CFD0CF",
+      },
+      {
+        name: "HOLD",
+        backgroundColor: "#E2E3E2",
+      }
+    ];
+
     render(
       html`
-        <radar-element .title=${title}>
-          some more light-dom
-        </radar-element>
+        <radar-element diameter="800" .ringConfig="${rings}"></radar-element>
       `,
       document.querySelector('#demo')
     );
