@@ -1,1 +1,1 @@
-export { RadarElement } from './src/RadarElement.js';
+export { RadarElement } from './src/RadarElement';

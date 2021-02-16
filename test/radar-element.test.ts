@@ -1,7 +1,7 @@
 import { html, fixture, expect } from '@open-wc/testing';
 
-import { RadarElement } from '../src/RadarElement.js';
-import '../radar-element.js';
+import { RadarElement } from '../src/RadarElement';
+import '../radar-element';
 
 describe('RadarElement', () => {
   it('generates basic SVG', async () => {

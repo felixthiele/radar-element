@@ -1,8 +1,8 @@
 import {css, html, LitElement, property} from 'lit-element';
 
 import {translate} from "./utils/html.utils";
-import {generateGrid} from "./GridHtml.js";
-import {computeDefaultRadius, Ring} from "./domain/ring.js";
+import {generateGrid} from "./generators/grid-generator";
+import {computeDefaultRadius, Ring} from "./domain/ring";
 
 interface RingConfig {
   name: string;

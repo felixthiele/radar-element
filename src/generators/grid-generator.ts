@@ -1,5 +1,5 @@
 import {svg} from "lit-element";
-import {Ring} from "./domain/ring.js";
+import {Ring} from "../domain/ring";
 
 export function generateGrid(rings: Ring[]) {
   return svg`
