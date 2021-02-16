@@ -20,22 +20,54 @@
       name: "ADOPT",
       backgroundColor: "#841339",
       headlineColor: "#fff",
+      entryStyle: {
+        color: "#fff",
+        labelColor: "#000",
+        tooltipStyle: {
+          color: "#333",
+          labelColor: "#fff",
+        },
+      },
     },
     {
       name: "TRIAL",
       backgroundColor: "#B1B2B1",
       headlineColor: "#000",
+      entryStyle: {
+        color: "#000",
+        labelColor: "#fff",
+        tooltipStyle: {
+          color: "#333",
+          labelColor: "#fff",
+        },
+      },
     },
     {
       name: "ASSESS",
       backgroundColor: "#CFD0CF",
       headlineColor: "#000",
+      entryStyle: {
+        color: "#000",
+        labelColor: "#fff",
+        tooltipStyle: {
+          color: "#333",
+          labelColor: "#fff",
+        },
+      },
     },
     {
       name: "HOLD",
       backgroundColor: "#E2E3E2",
       headlineColor: "#000",
-    }
+      entryStyle: {
+        color: "#000",
+        labelColor: "#fff",
+        tooltipStyle: {
+          color: "#333",
+          labelColor: "#fff",
+        },
+      },
+    },
   ];
 
   const sections = [
@@ -56,9 +88,31 @@
     },
   ];
 
+  const entries = [{
+    label: "Java",
+      section: 0,
+    ring: 0,
+  },
+  {
+    label: "Typescript / Javascript",
+      section: 0,
+    ring: 0,
+  },
+  {
+    label: "Swift",
+      section: 0,
+    ring: 1,
+  },
+  {
+    label: "Kotlin",
+      section: 0,
+    ring: 1,
+    link: "https://kotlinlang.org/",
+  }]
+
   render(
     html`
-      <radar-element diameter="800" .ringConfigs="${rings}" .sectionConfigs="${sections}"></radar-element>
+      <radar-element diameter="800" .ringConfigs="${rings}" .sectionConfigs="${sections}" .entryConfigs="${entries}"></radar-element>
     `,
     document.querySelector('#demo')
   );

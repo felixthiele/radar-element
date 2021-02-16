@@ -24,3 +24,15 @@ export function toCartesian(polar: PolarCoordinates): CartesianCoordinates {
     y: polar.r * Math.sin(normalized),
   };
 }
+
+let seed = 42;
+
+function getRandom(): number {
+  const x = Math.sin(seed++) * 10000;
+  return x - Math.floor(x);
+}
+
+export function getRandomBetween(min: number, max: number): number {
+  return min + getRandom() * (max - min);
+}
+

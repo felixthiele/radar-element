@@ -1,3 +1,5 @@
+import {EntryStyle} from "./entry";
+
 export interface Ring {
   name: string;
   index: number;
@@ -5,6 +7,7 @@ export interface Ring {
   previousRing?: Ring;
   backgroundColor: string;
   headlineColor: string;
+  entryStyle: EntryStyle;
 }
 
 export function computeDefaultRadius(

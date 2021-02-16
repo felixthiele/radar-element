@@ -4,15 +4,26 @@ import {translate} from "./utils/html.utils";
 import {generateGrid} from "./generators/grid-generator";
 import {computeDefaultRadius, Ring} from "./domain/ring";
 import {getRadialMax, getRadialMin, Section} from "./domain/section";
+import {generateEntries} from "./generators/entry-generator";
+import {Segment} from "./domain/segment";
+import {Entry, EntryStyle} from "./domain/entry";
 
 interface RingConfig {
   name: string;
   backgroundColor: string;
   headlineColor: string;
+  entryStyle: EntryStyle;
 }
 
 interface SectionConfig {
   name: string;
+}
+
+export interface EntryConfig {
+  label: string;
+  section: number;
+  ring: number;
+  link?: string;
 }
 
 export class RadarElement extends LitElement {
@@ -53,15 +64,23 @@ export class RadarElement extends LitElement {
    */
   @property({type: Array}) sectionConfigs: Array<SectionConfig> = [];
 
+  /**
+   * The configuration for the entries of the radar.
+   */
+  @property({type: Array}) entryConfigs: Array<EntryConfig> = [];
+
   private rings: Ring[] = [];
 
   private sections: Section[] = [];
+
+  private entries: Entry[] = [];
 
   render() {
     return html`
       <svg width="${this.diameter}" height="${this.diameter}">
         <g id="center" transform="${translate(this.diameter / 2, this.diameter / 2)}">
           ${generateGrid(this.rings, this.sections)}
+          ${generateEntries(this.entries)}
         </g>
       </svg>
     `;
@@ -69,6 +88,10 @@ export class RadarElement extends LitElement {
 
   protected firstUpdated(_changedProperties: PropertyValues) {
     super.firstUpdated(_changedProperties);
+
+    this.rings = [];
+    this.sections = [];
+    this.entries = [];
 
     this.ringConfigs.forEach((config, index) => {
       const ring: Ring = {
@@ -88,15 +111,25 @@ export class RadarElement extends LitElement {
       this.rings.push(ring);
     })
 
-    this.sectionConfigs.forEach((config, index) => {
+    this.sectionConfigs.forEach((config, sectionIndex) => {
       const section: Section = {
         ...config,
-        index,
-        radialMin: getRadialMin(this.sectionConfigs.length, index),
-        radialMax: getRadialMax(this.sectionConfigs.length, index),
+        index: sectionIndex,
+        radialMin: getRadialMin(this.sectionConfigs.length, sectionIndex),
+        radialMax: getRadialMax(this.sectionConfigs.length, sectionIndex),
       };
 
       this.sections.push(section);
+
+      this.rings.forEach((ring, ringIndex) => {
+        const segment = new Segment(ring, section);
+
+        this.entryConfigs
+          .filter((e) => e.section === sectionIndex && e.ring === ringIndex)
+          .sort((a, b) => a.label.localeCompare(b.label))
+          .map((e) => segment.generateEntry(e, ring.entryStyle))
+          .forEach((e) => this.entries.push(e));
+      });
     });
 
     this.update(_changedProperties)
