@@ -1,4 +1,4 @@
-import {css, html, LitElement, property} from 'lit-element';
+import {css, html, LitElement, property, PropertyValues} from 'lit-element';
 
 import {translate} from "./utils/html.utils";
 import {generateGrid} from "./generators/grid-generator";
@@ -50,6 +50,18 @@ export class RadarElement extends LitElement {
   private sections: Section[] = [];
 
   render() {
+    return html`
+      <svg width="${this.diameter}" height="${this.diameter}">
+        <g id="center" transform="${translate(this.diameter / 2, this.diameter / 2)}">
+          ${generateGrid(this.rings, this.sections)}
+        </g>
+      </svg>
+    `;
+  }
+
+  protected firstUpdated(_changedProperties: PropertyValues) {
+    super.firstUpdated(_changedProperties);
+
     this.ringConfigs.forEach((config, index) => {
       const ring: Ring = {
         ...config,
@@ -70,22 +82,16 @@ export class RadarElement extends LitElement {
 
     this.sectionConfigs.forEach((config, index) => {
       const section: Section = {
+        ...config,
         index,
         radialMin: getRadialMin(this.sectionConfigs.length, index),
         radialMax: getRadialMax(this.sectionConfigs.length, index),
-        ...config,
       };
 
       this.sections.push(section);
     });
 
-    return html`
-      <svg width="${this.diameter}" height="${this.diameter}">
-        <g id="center" transform="${translate(this.diameter / 2, this.diameter / 2)}">
-          ${generateGrid(this.rings, this.sections)}
-        </g>
-      </svg>
-    `;
+    this.update(_changedProperties)
   }
 
 }

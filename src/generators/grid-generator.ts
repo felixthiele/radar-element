@@ -16,7 +16,7 @@ function generateRing(ring: Ring) {
 }
 
 export function generateGrid(rings: Ring[], sections: Section[]) {
-  const maxRadius = rings[rings.length - 1].radius;
+  const maxRadius = rings && rings.length > 0 ? rings[rings.length - 1].radius : 0;
   return svg`
     <g id="grid">
       ${rings.reverse().map(ring => generateRing(ring))}
