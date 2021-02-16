@@ -1,8 +1,10 @@
 export interface Ring {
+  name: string;
   index: number;
   radius: number;
   previousRing?: Ring;
   backgroundColor: string;
+  headlineColor: string;
 }
 
 export function computeDefaultRadius(

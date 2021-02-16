@@ -15,12 +15,17 @@ function generateRing(ring: Ring) {
   return svg`<circle class="ring" cx="0" cy="0" r="${ring.radius}" style="fill: ${ring.backgroundColor};"></circle>`
 }
 
+function generateRingHeading(ring: Ring) {
+  return svg`<text class="ring-heading" y="${-ring.radius + 40}" text-anchor="middle" fill="${ring.headlineColor}">${ring.name}</text>`
+}
+
 export function generateGrid(rings: Ring[], sections: Section[]) {
   const maxRadius = rings && rings.length > 0 ? rings[rings.length - 1].radius : 0;
   return svg`
     <g id="grid">
       ${rings.reverse().map(ring => generateRing(ring))}
       ${sections.map((section) => generateSection(section, maxRadius))}
+      ${rings.reverse().map(ring => generateRingHeading(ring))}
     </g>
   `
 }

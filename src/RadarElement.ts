@@ -8,6 +8,7 @@ import {getRadialMax, getRadialMin, Section} from "./domain/section";
 interface RingConfig {
   name: string;
   backgroundColor: string;
+  headlineColor: string;
 }
 
 interface SectionConfig {
@@ -26,6 +27,13 @@ export class RadarElement extends LitElement {
 
     .section {
       stroke: var(--grid-color, #fff)
+    }
+
+    .ring-heading {
+      font-size: 20px;
+      font-weight: bold;
+      pointer-events: none;
+      user-select: none;
     }
   `;
 
