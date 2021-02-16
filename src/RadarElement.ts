@@ -3,10 +3,15 @@ import {css, html, LitElement, property} from 'lit-element';
 import {translate} from "./utils/html.utils";
 import {generateGrid} from "./generators/grid-generator";
 import {computeDefaultRadius, Ring} from "./domain/ring";
+import {getRadialMax, getRadialMin, Section} from "./domain/section";
 
 interface RingConfig {
   name: string;
   backgroundColor: string;
+}
+
+interface SectionConfig {
+  name: string;
 }
 
 export class RadarElement extends LitElement {
@@ -18,28 +23,40 @@ export class RadarElement extends LitElement {
     svg {
       background-color: var(--radar-element-background-color, #fff)
     }
+
+    .section {
+      stroke: var(--grid-color, #fff)
+    }
   `;
 
   /**
-   * The diameter the radar should have.
+   * The diameter of the radar.
    */
   @property() diameter = 0;
 
   /**
    * The configuration for the rings of the radar.
    */
-  @property({type: Array}) ringConfig: Array<RingConfig> = [];
+  @property({type: Array}) ringConfigs: Array<RingConfig> = [];
+
+
+  /**
+   * The configuration for the sections of the radar.
+   */
+  @property({type: Array}) sectionConfigs: Array<SectionConfig> = [];
 
   private rings: Ring[] = [];
 
+  private sections: Section[] = [];
+
   render() {
-    this.ringConfig.forEach((config, index) => {
+    this.ringConfigs.forEach((config, index) => {
       const ring: Ring = {
         ...config,
         index,
         radius: computeDefaultRadius(
           this.diameter,
-          this.ringConfig.length,
+          this.ringConfigs.length,
           index
         ),
       };
@@ -51,10 +68,21 @@ export class RadarElement extends LitElement {
       this.rings.push(ring);
     })
 
+    this.sectionConfigs.forEach((config, index) => {
+      const section: Section = {
+        index,
+        radialMin: getRadialMin(this.sectionConfigs.length, index),
+        radialMax: getRadialMax(this.sectionConfigs.length, index),
+        ...config,
+      };
+
+      this.sections.push(section);
+    });
+
     return html`
       <svg width="${this.diameter}" height="${this.diameter}">
         <g id="center" transform="${translate(this.diameter / 2, this.diameter / 2)}">
-          ${generateGrid(this.rings)}
+          ${generateGrid(this.rings, this.sections)}
         </g>
       </svg>
     `;

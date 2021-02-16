@@ -9,37 +9,55 @@
   </style>
 </head>
 <body>
-  <div id="demo"></div>
+<div id="demo"></div>
 
-  <script type="module">
-    import { html, render } from 'lit-html';
-    import '../dist/radar-element.js';
+<script type="module">
+  import {html, render} from 'lit-html';
+  import '../dist/radar-element.js';
 
-    const rings = [
-      {
-        name: "ADOPT",
-        backgroundColor: "#841339",
-      },
-      {
-        name: "TRIAL",
-        backgroundColor: "#B1B2B1",
-      },
-      {
-        name: "ASSESS",
-        backgroundColor: "#CFD0CF",
-      },
-      {
-        name: "HOLD",
-        backgroundColor: "#E2E3E2",
-      }
-    ];
+  const rings = [
+    {
+      name: "ADOPT",
+      backgroundColor: "#841339",
+    },
+    {
+      name: "TRIAL",
+      backgroundColor: "#B1B2B1",
+    },
+    {
+      name: "ASSESS",
+      backgroundColor: "#CFD0CF",
+    },
+    {
+      name: "HOLD",
+      backgroundColor: "#E2E3E2",
+    }
+  ];
 
-    render(
-      html`
-        <radar-element diameter="800" .ringConfig="${rings}"></radar-element>
-      `,
-      document.querySelector('#demo')
-    );
-  </script>
+  const sections = [
+    {
+      name: "Languages",
+    },
+    {
+      name: "Frameworks",
+    },
+    {
+      name: "Data Storage & Message Broker",
+    },
+    {
+      name: "Infrastructure",
+    },
+    {
+      name: "Tools",
+    },
+  ];
+
+  render(
+    html`
+      <radar-element diameter="800" .ringConfigs="${rings}" .sectionConfigs="${sections}"></radar-element>
+    `,
+    document.querySelector('#demo')
+  );
+</script>
 </body>
 </html>
