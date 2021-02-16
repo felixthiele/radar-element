@@ -33,17 +33,28 @@ export class RadarElement extends LitElement {
     }
 
     svg {
-      background-color: var(--radar-element-background-color, #fff)
+      background-color: var(--radar-element-background-color, #fff);
+      font-family: Arial;
     }
 
     .section {
-      stroke: var(--grid-color, #fff)
+      stroke: var(--grid-color, #fff);
+      stroke-width: 1px;
+    }
+
+    .ring {
+      stroke: var(--grid-color, #fff);
+      stroke-width: 1px;
     }
 
     .ring-heading {
       font-size: 20px;
       font-weight: bold;
       pointer-events: none;
+      user-select: none;
+    }
+
+    .entry {
       user-select: none;
     }
   `;
