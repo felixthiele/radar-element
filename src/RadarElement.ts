@@ -1,6 +1,6 @@
 import {css, html, LitElement, property, PropertyValues} from 'lit-element';
 
-import {translate} from "./utils/html.utils";
+import {translate} from "./utils/svg.utils";
 import {generateGrid} from "./generators/grid-generator";
 import {computeDefaultRadius, Ring} from "./domain/ring";
 import {getRadialMax, getRadialMin, Section} from "./domain/section";

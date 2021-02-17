@@ -1,7 +1,7 @@
 import {svg} from "lit-element";
 import {styleMap} from "lit-html/directives/style-map";
 import {Entry} from "../domain/entry";
-import {translate} from "../utils/html.utils";
+import {translate} from "../utils/svg.utils";
 
 function generateEntry(entry: Entry) {
   const circleStyle = styleMap({

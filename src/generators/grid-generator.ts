@@ -1,15 +1,8 @@
 import {svg} from "lit-element";
 import {Ring} from "../domain/ring";
 import {Section} from "../domain/section";
-import {CartesianCoordinates, toCartesian} from "../utils/math.utils";
-
-function generateSection(section: Section, maxRadius: number) {
-  const outerPoint = toCartesian({
-    t: section.radialMax,
-    r: maxRadius
-  })
-  return svg`<line class="section" x1="0" y1="0" x2="${outerPoint.x}" y2="${outerPoint.y}"></line>`
-}
+import {toCartesian} from "../utils/math.utils";
+import {generateArc} from "../utils/svg.utils";
 
 function generateRing(ring: Ring) {
   return svg`<circle class="ring" cx="0" cy="0" r="${ring.radius}" style="fill: ${ring.backgroundColor};"></circle>`
@@ -19,10 +12,12 @@ function generateRingHeading(ring: Ring) {
   return svg`<text class="ring-heading" y="${-ring.radius + 40}" text-anchor="middle" fill="${ring.headlineColor}">${ring.name}</text>`
 }
 
-function generateArc(start: CartesianCoordinates, end: CartesianCoordinates, radius: number, flipHorizontally: boolean) {
-  return flipHorizontally ?
-    `M ${end.x} ${end.y} A ${radius} ${radius} 0 0 0 ${start.x} ${start.y}` :
-    `M ${start.x} ${start.y} A ${radius} ${radius} 0 0 1 ${end.x} ${end.y}`;
+function generateSection(section: Section, maxRadius: number) {
+  const outerPoint = toCartesian({
+    t: section.radialMax,
+    r: maxRadius
+  })
+  return svg`<line class="section" x1="0" y1="0" x2="${outerPoint.x}" y2="${outerPoint.y}"></line>`
 }
 
 function generateSectionHeading(section: Section, radius: number) {

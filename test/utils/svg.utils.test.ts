@@ -1,6 +1,6 @@
 import {expect} from '@open-wc/testing';
 
-import {translate} from '../../src/utils/html.utils';
+import {translate} from '../../src/utils/svg.utils';
 
 describe('html utils', () => {
 
