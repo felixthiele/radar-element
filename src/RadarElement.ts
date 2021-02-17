@@ -109,7 +109,7 @@ export class RadarElement extends LitElement {
         ...config,
         index,
         radius: computeDefaultRadius(
-          this.diameter,
+          this.diameter - 40,
           this.ringConfigs.length,
           index
         ),
