@@ -25,18 +25,18 @@ function generateEntry(entry: Entry) {
     `;
 }
 
-function generateEntryContainer(entry: Entry) {
+function generateEntryContainer(entry: Entry, highlightEntry: (selectedEntry: Entry) => void, unhighlightEntry: () => void) {
   return svg`
-    <g class="entry" id="entry-${entry.id}" transform="${translate(entry.x, entry.y)}">
+    <g class="entry" id="entry-${entry.id}" transform="${translate(entry.x, entry.y)}" @mouseover="${() => highlightEntry(entry)}" @mouseout="${unhighlightEntry}">
         ${generateEntry(entry)}
     </g>
   `
 }
 
-export function generateEntries(entries: Entry[]) {
+export function generateEntries(entries: Entry[], highlightEntry: (entry: Entry) => void, unhighlightEntry: () => void) {
   return svg`
     <g id="entries">
-        ${entries.map(entry => generateEntryContainer(entry))}
+        ${entries.map(entry => generateEntryContainer(entry, highlightEntry, unhighlightEntry))}
     </g>
   `
 
