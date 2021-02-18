@@ -1,8 +1,7 @@
 export interface Section {
-  index: number;
+  name: string;
   radialMin: number;
   radialMax: number;
-  name: string;
 }
 
 export function getRadialMin(

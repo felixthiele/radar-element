@@ -167,7 +167,6 @@ export class RadarElement extends LitElement {
     this.ringConfigs.forEach((config, index) => {
       const ring: Ring = {
         ...config,
-        index,
         radius: computeDefaultRadius(
           this.diameter - 40,
           this.ringConfigs.length,
@@ -185,7 +184,6 @@ export class RadarElement extends LitElement {
     this.sectionConfigs.forEach((config, sectionIndex) => {
       const section: Section = {
         ...config,
-        index: sectionIndex,
         radialMin: getRadialMin(this.sectionConfigs.length, sectionIndex),
         radialMax: getRadialMax(this.sectionConfigs.length, sectionIndex),
       };

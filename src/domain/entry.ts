@@ -1,4 +1,4 @@
-import { Segment } from "./segment";
+import {Segment} from "./segment";
 
 export const ENTRY_RADIUS = 9;
 export const ENTRY_DIAMETER = 2 * ENTRY_RADIUS;

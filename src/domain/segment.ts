@@ -1,11 +1,7 @@
-import { Entry, ENTRY_DIAMETER, ENTRY_RADIUS, EntryStyle } from "./entry";
-import {
-  toCartesian,
-  PolarCoordinates,
-  getRandomBetween,
-} from "../utils/math.utils";
-import { Ring } from "./ring";
-import { Section } from "./section";
+import {Entry, ENTRY_DIAMETER, ENTRY_RADIUS, EntryStyle} from "./entry";
+import {getRandomBetween, PolarCoordinates, toCartesian} from "../utils/math.utils";
+import {Ring} from "./ring";
+import {Section} from "./section";
 
 export class Segment {
   public entries: Entry[] = [];
