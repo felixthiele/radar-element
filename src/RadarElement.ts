@@ -125,7 +125,7 @@ export class RadarElement extends LitElement {
   @property({type: Array}) entryConfigs: Array<EntryConfig> = [];
 
   /**
-   * The currently highlighted Entry.
+   * The currently highlighted entry.
    */
   @property({type: Object}) highlightedEntry?: Entry;
 

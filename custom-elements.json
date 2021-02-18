@@ -3,27 +3,49 @@
   "tags": [
     {
       "name": "radar-element",
-      "description": "A component with a title and an action counter",
+      "description": "A component to render a radar visualization consisting of rings, sections and entries.",
       "properties": [
         {
-          "name": "title",
-          "type": "String",
-          "description": "The title of your component",
-          "default": "Hey there"
+          "name": "diameter",
+          "type": "number",
+          "description": "The diameter of the radar.",
+          "default": 0
         },
         {
-          "name": "counter",
-          "type": "Number",
-          "description": "An action counter",
-          "default": 0
+          "name": "ringConfigs",
+          "type": "Array",
+          "description": "The configuration for the rings of the radar.",
+          "default": []
+        },
+        {
+          "name": "sectionConfigs",
+          "type": "Array",
+          "description": "The configuration for the sections of the radar.",
+          "default": []
+        },
+        {
+          "name": "entryConfigs",
+          "type": "Array",
+          "description": "The configuration for the entries of the radar.",
+          "default": []
+        },
+        {
+          "name": "highlightedEntry",
+          "type": "Object",
+          "description": "The currently highlighted entry."
         }
       ],
       "events": [],
       "slots": [],
       "cssProperties": [
         {
-          "name": "--radar-element-text-color",
-          "description": "Main Text Color",
+          "name": "--radar-element-background-color",
+          "description": "The background color of the radar.",
+          "type": "Color"
+        },
+        {
+          "name": "--grid-color",
+          "description": "The color of the grid of the radar.",
           "type": "Color"
         }
       ]
