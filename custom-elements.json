@@ -47,6 +47,11 @@
           "name": "--grid-color",
           "description": "The color of the grid of the radar.",
           "type": "Color"
+        },
+        {
+          "name": "--tooltip-background-color",
+          "description": "The background color of the tooltip.",
+          "type": "Color"
         }
       ]
     }

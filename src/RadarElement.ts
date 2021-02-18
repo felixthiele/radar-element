@@ -68,7 +68,7 @@ export class RadarElement extends LitElement {
 
     .tooltip {
       display: grid;
-      background-color: #fff;
+      background-color: var(--tooltip-background-color, #fff);
       grid-template-rows: 15px 25px;
       grid-template-columns: 40px 150px;
       grid-column-gap: 5px;
