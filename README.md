@@ -15,9 +15,7 @@ npm i radar-element
 <radar-element diameter="800" [ringConfigs]="rings" [sectionConfigs]="sections" [entryConfigs]="entries"></radar-element>
 ```
 
-In the example we have used the Angular notation for binding directly to properties. 
-
-For a binding via native html, the attributes `ring-configs`, `section-configs` and `entry-configs` have to be used and the arrays have to be converted via `JSON.stringify()`.
+In the example we have used the Angular notation for binding directly to properties. For a binding via native html the arrays have to be converted via `JSON.stringify()`.
 
 ## Configuration
 
@@ -94,6 +92,38 @@ The following css properties can be used to style the radar.
 
 
 ## Development
+
+### Overview
+The whole application is designed to be lightweight and that it must integrate easily in all different kinds of applications. 
+Therefore, we chose the web-components standard for implementation.  
+
+#### Domain
+When drawing a radar we split the whole circle into different parts, mainly *rings* and *sections*.
+
+A *ring* depicts the maturity (or whatever scale the user of the radar chooses) while *sections* partition the entries into categories.
+We call the overlap between a *ring* and *section* a *segment*. On those segments we position the *entries*.
+
+#### Structure
+The application is structured as follows:
+
+```
+/
+../demo
+..../index.html - a simple page to integrate the element to for testing purposes
+../src
+..../domain - contains the domain objects 
+..../generators - contains pure functions that generate SVG or HTML code based on input parameters
+..../utils - basic math and svg utilities
+..../RadarElements.ts - the backing class for the web component implementation
+../test
+..../generators - contains tests for the generators
+..../utils - contains tests for the utils
+..../radar-element.ts - contains test for the web-component
+/custom-elements.json - custom element manifest file
+/index.ts - the entry point if this whole package is included via npm
+/radar-element.ts - wrapper code for importing the backing class and registering it as a custom element
+```
+Some standard files (like `LICENSE`, or `package.json`) are omitted for brevity. 
 
 ### Local Demo with `web-dev-server`
 ```bash
