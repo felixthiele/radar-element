@@ -10,20 +10,22 @@ import {Entry, EntryStyle} from "./domain/entry";
 import {generateTooltip} from "./generators/tooltip-generator";
 
 interface RingConfig {
-  name: string;
+  id: string;
+  displayName: string;
   backgroundColor: string;
   headlineColor: string;
   entryStyle: EntryStyle;
 }
 
 interface SectionConfig {
-  name: string;
+  id: string;
+  displayName: string;
 }
 
 export interface EntryConfig {
   label: string;
-  section: number;
-  ring: number;
+  sectionId: string;
+  ringId: string;
   link?: string;
 }
 
@@ -181,20 +183,20 @@ export class RadarElement extends LitElement {
       this.rings.push(ring);
     })
 
-    this.sectionConfigs.forEach((config, sectionIndex) => {
+    this.sectionConfigs.forEach((sectionConfig, sectionIndex) => {
       const section: Section = {
-        ...config,
+        ...sectionConfig,
         radialMin: getRadialMin(this.sectionConfigs.length, sectionIndex),
         radialMax: getRadialMax(this.sectionConfigs.length, sectionIndex),
       };
 
       this.sections.push(section);
 
-      this.rings.forEach((ring, ringIndex) => {
+      this.rings.forEach((ring) => {
         const segment = new Segment(ring, section);
 
         this.entryConfigs
-          .filter((e) => e.section === sectionIndex && e.ring === ringIndex)
+          .filter((e) => e.sectionId === sectionConfig.id && e.ringId === ring.id)
           .sort((a, b) => a.label.localeCompare(b.label))
           .map((e) => segment.generateEntry(e, ring.entryStyle))
           .forEach((e) => this.entries.push(e));

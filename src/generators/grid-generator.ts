@@ -9,7 +9,7 @@ function generateRing(ring: Ring) {
 }
 
 function generateRingHeading(ring: Ring) {
-  return svg`<text class="ring-heading" y="${-ring.radius + 40}" text-anchor="middle" fill="${ring.headlineColor}">${ring.name}</text>`
+  return svg`<text class="ring-heading" y="${-ring.radius + 40}" text-anchor="middle" fill="${ring.headlineColor}">${ring.displayName}</text>`
 }
 
 function generateSection(section: Section, maxRadius: number) {
@@ -35,11 +35,11 @@ function generateSectionHeading(section: Section, radius: number) {
 
   return svg`
     <defs>
-        <path id="path-section-${section.name}" fill="none" stroke="green" d="${generateArc(start, end, radius, isBelowHorizon)}"></path>
+        <path id="path-section-${section.displayName}" fill="none" stroke="green" d="${generateArc(start, end, radius, isBelowHorizon)}"></path>
     </defs>
 
     <text class="section-heading" side="right" dy="${isBelowHorizon ? "10" : "0"}">
-        <textPath startOffset="50%" text-anchor="middle" href="#path-section-${section.name}">${section.name}</textPath>
+        <textPath startOffset="50%" text-anchor="middle" href="#path-section-${section.displayName}">${section.displayName}</textPath>
     </text>
   `;
 }

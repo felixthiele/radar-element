@@ -1,5 +1,5 @@
 export interface Section {
-  name: string;
+  displayName: string;
   radialMin: number;
   radialMax: number;
 }

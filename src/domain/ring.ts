@@ -1,7 +1,8 @@
 import {EntryStyle} from "./entry";
 
 export interface Ring {
-  name: string;
+  id: string;
+  displayName: string;
   radius: number;
   previousRing?: Ring;
   backgroundColor: string;

@@ -19,7 +19,8 @@ describe('grid generator', () => {
 
   it('generates rings', async () => {
     const rings = [{
-      name: "test",
+      id: "test",
+      displayName: "test",
       radius: 10,
       backgroundColor: "#fff",
       headlineColor: "#000",

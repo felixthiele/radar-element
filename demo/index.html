@@ -17,7 +17,8 @@
 
   const rings = [
     {
-      name: "ADOPT",
+      id: "adopt",
+      displayName: "ADOPT",
       backgroundColor: "#841339",
       headlineColor: "#fff",
       entryStyle: {
@@ -26,7 +27,8 @@
       },
     },
     {
-      name: "TRIAL",
+      id: "trial",
+      displayName: "TRIAL",
       backgroundColor: "#B1B2B1",
       headlineColor: "#000",
       entryStyle: {
@@ -35,7 +37,8 @@
       },
     },
     {
-      name: "ASSESS",
+      id: "assess",
+      displayName: "ASSESS",
       backgroundColor: "#CFD0CF",
       headlineColor: "#000",
       entryStyle: {
@@ -44,7 +47,8 @@
       },
     },
     {
-      name: "HOLD",
+      id: "hold",
+      displayName: "HOLD",
       backgroundColor: "#E2E3E2",
       headlineColor: "#000",
       entryStyle: {
@@ -56,47 +60,55 @@
 
   const sections = [
     {
-      name: "Languages",
+      id: "languages",
+      displayName: "Languages",
     },
     {
-      name: "Frameworks",
+      id: "frameworks",
+      displayName: "Frameworks",
     },
     {
-      name: "Data Storage & Message Broker",
+      id: "storage",
+      displayName: "Data Storage & Message Broker",
     },
     {
-      name: "Infrastructure",
+      id: "infrastructure",
+      displayName: "Infrastructure",
     },
     {
-      name: "Tools",
+      id: "tools",
+      displayName: "Tools",
     },
   ];
 
-  const entries = [{
-    label: "Java",
-      section: 0,
-    ring: 0,
-  },
-  {
-    label: "Typescript / Javascript",
-      section: 0,
-    ring: 0,
-  },
-  {
-    label: "Swift",
-      section: 0,
-    ring: 1,
-  },
-  {
-    label: "Kotlin",
-      section: 0,
-    ring: 1,
-    link: "https://kotlinlang.org/",
-  }]
+  const entries = [
+    {
+      label: "Java",
+      sectionId: "languages",
+      ringId: "adopt",
+    },
+    {
+      label: "Typescript / Javascript",
+      sectionId: "languages",
+      ringId: "adopt",
+    },
+    {
+      label: "Swift",
+      sectionId: "languages",
+      ringId: "trial",
+    },
+    {
+      label: "Kotlin",
+      sectionId: "languages",
+      ringId: "trial",
+      link: "https://kotlinlang.org/",
+    }
+  ]
 
   render(
     html`
-      <radar-element diameter="800" .ringConfigs="${rings}" .sectionConfigs="${sections}" .entryConfigs="${entries}"></radar-element>
+      <radar-element diameter="800" .ringConfigs="${rings}" .sectionConfigs="${sections}"
+                     .entryConfigs="${entries}"></radar-element>
     `,
     document.querySelector('#demo')
   );
