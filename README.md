@@ -24,7 +24,8 @@ In the example we have used the Angular notation for binding directly to propert
 
 ```json
 {
-  "name": "ADOPT",
+  "id": "adopt",
+  "displayName": "ADOPT",
   "backgroundColor": "#841339",
   "headlineColor": "#fff",
   "entryStyle": {
@@ -37,7 +38,8 @@ In the example we have used the Angular notation for binding directly to propert
 
 | Parameter         | Data-Type     | Description                                                                                       |
 | ----------------- | ------------- | ------------------------------------------------------------------------------------------------- |
-| name              | `string`      | The name of the ring                                                                              |
+| id                | `string`      | The id of the ring                                                                                |
+| displayName       | `string`      | The name of the ring that should be displayed                                                     |
 | backgroundColor   | `string`      | The background color that should be used for the individual ring                                  |
 | headlineColor     | `string`      | The color of the headline. Make sure that it has enough contrast to the ring's *backgroundColor*  |
 | entryStyle        | `{}`          | The styling of the entries belonging to that ring
@@ -54,21 +56,23 @@ The *entryStyle* exhibits the following config-parameters:
 
 ```json
 {
-  "name": "Languages"  
+  "id": "languages",
+  "displayName": "Languages"  
 }
 ```
 
 | Parameter         | Data-Type     | Description                                                         |
 | ----------------- | ------------- | ------------------------------------------------------------------- |
-| name              | `string`      | The name of the section                                             |
+| id                | `string`      | The id of the section                                               |
+| displayName       | `string`      | The name of the section that should be displayed                    | 
 
 #### entry-config
 
 ```json
 {
   "label": "TypeScript",
-  "section": 0,
-  "ring": 0,
+  "sectionId": "languages",
+  "ringId": "adopt",
   "link": "https://www.typescriptlang.org/"
 }
 ```
@@ -76,8 +80,8 @@ The *entryStyle* exhibits the following config-parameters:
 | Parameter         | Data-Type     | Description                                                         |
 | ----------------- | ------------- | ------------------------------------------------------------------- |
 | label             | `string`      | The label of the entry                                              |
-| section           | `number`      | The index of the section that entry belongs to                      |
-| ring              | `number`      | The index of the ring that entry belongs to                         |
+| sectionId         | `number`      | The id of the section that entry belongs to                         |
+| ringId            | `number`      | The id of the ring that entry belongs to                            |
 | link              | `string`      | A link the user shall be redirected to, when clicking on the entry  |
 
 
