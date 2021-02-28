@@ -80,8 +80,8 @@ The *entryStyle* exhibits the following config-parameters:
 | Parameter         | Data-Type     | Description                                                         |
 | ----------------- | ------------- | ------------------------------------------------------------------- |
 | label             | `string`      | The label of the entry                                              |
-| sectionId         | `number`      | The id of the section that entry belongs to                         |
-| ringId            | `number`      | The id of the ring that entry belongs to                            |
+| sectionId         | `string`      | The id of the section that entry belongs to                         |
+| ringId            | `string`      | The id of the ring that entry belongs to                            |
 | link              | `string`      | A link the user shall be redirected to, when clicking on the entry  |
 
 
