@@ -17,11 +17,11 @@ function generateEntry(entry: Entry) {
   return entry.link ? svg`
         <a href="${entry.link}" target="_blank">
             <circle r="9" style="${circleStyle}" "></circle>
-            <text y="3" style="${textStyle}">${entry.id}</text>
+            <text y="3" style="${textStyle}">${entry.labelShort}</text>
         </a>
     ` : svg`
         <circle r="9" style="${circleStyle}"></circle>
-        <text y="3" style="${textStyle}">${entry.id}</text>
+        <text y="3" style="${textStyle}">${entry.labelShort}</text>
     `;
 }
 

@@ -23,7 +23,9 @@ interface SectionConfig {
 }
 
 export interface EntryConfig {
-  label: string;
+  id: string;
+  labelShort: string;
+  labelLong: string;
   sectionId: string;
   ringId: string;
   link?: string;
@@ -203,7 +205,7 @@ export class RadarElement extends LitElement {
 
         this.entryConfigs
           .filter((e) => e.sectionId === sectionConfig.id && e.ringId === ring.id)
-          .sort((a, b) => a.label.localeCompare(b.label))
+          .sort((a, b) => a.labelLong.localeCompare(b.labelLong))
           .map((e) => segment.generateEntry(e, ring.entryStyle))
           .forEach((e) => this.entries.push(e));
       });

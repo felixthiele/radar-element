@@ -70,7 +70,9 @@ The *entryStyle* exhibits the following config-parameters:
 
 ```json
 {
-  "label": "TypeScript",
+  "id": "73bef846-9177-4d48-b8d6-dcaa79dbaa28",
+  "labelShort": "1",
+  "labelLong": "TypeScript",
   "sectionId": "languages",
   "ringId": "adopt",
   "link": "https://www.typescriptlang.org/"
@@ -79,7 +81,9 @@ The *entryStyle* exhibits the following config-parameters:
 
 | Parameter         | Data-Type     | Description                                                         |
 | ----------------- | ------------- | ------------------------------------------------------------------- |
-| label             | `string`      | The label of the entry                                              |
+| id                | `string`      | The id of the entry                                                 |
+| labelShort        | `string`      | The character that should be printed on the entries circle.         |
+| labelLong         | `string`      | The label of the entry                                              |
 | sectionId         | `string`      | The id of the section that entry belongs to                         |
 | ringId            | `string`      | The id of the ring that entry belongs to                            |
 | link              | `string`      | A link the user shall be redirected to, when clicking on the entry  |

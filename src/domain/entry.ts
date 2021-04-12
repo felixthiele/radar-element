@@ -9,9 +9,10 @@ export interface EntryStyle {
 }
 
 export interface Entry {
-  id: number;
+  id: string;
   segment: Segment;
-  label: string;
+  labelShort: string;
+  labelLong: string;
   x: number;
   y: number;
   link?: string;

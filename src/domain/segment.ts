@@ -12,8 +12,6 @@ export class Segment {
 
   private readonly possiblePositions: PolarCoordinates[];
 
-  private static totalEntryCount: number = 0;
-
   constructor(public ring: Ring, public section: Section) {
     this.polarMin = {
       t: section.radialMin,
@@ -51,17 +49,17 @@ export class Segment {
 
   generateEntry(
     entryConfig: {
-      label: string;
+      id: string;
+      labelShort: string;
+      labelLong: string;
       link?: string;
     },
     style: EntryStyle
   ): Entry {
     const coordinates = toCartesian(this.claimPositionForPoint());
     const entry = {
-      id: ++Segment.totalEntryCount,
       segment: this,
-      label: entryConfig.label,
-      link: entryConfig.link,
+      ...entryConfig,
       style,
       ...coordinates,
     };
