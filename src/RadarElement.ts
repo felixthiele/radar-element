@@ -45,6 +45,12 @@ export class RadarElement extends LitElement {
       stroke-width: 1px;
     }
 
+    .section-heading {
+      font-size: 16px;
+      pointer-events: none;
+      user-select: none;
+    }
+
     .ring {
       stroke: var(--grid-color, #fff);
       stroke-width: 1px;

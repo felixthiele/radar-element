@@ -35,7 +35,7 @@ function generateSectionHeading(section: Section, radius: number) {
 
   return svg`
     <defs>
-        <path id="path-section-${section.displayName}" fill="none" stroke="green" d="${generateArc(start, end, radius, isBelowHorizon)}"></path>
+        <path id="path-section-${section.displayName}" fill="none" d="${generateArc(start, end, radius, isBelowHorizon)}"></path>
     </defs>
 
     <text class="section-heading" side="right" dy="${isBelowHorizon ? "10" : "0"}">
