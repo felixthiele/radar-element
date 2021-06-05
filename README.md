@@ -27,6 +27,9 @@ In the example we have used the Angular notation for binding directly to propert
 ## Configuration
 
 ### Properties
+#### diameter
+The diameter of the whole SVG.
+
 #### ring-config
 
 ```json
