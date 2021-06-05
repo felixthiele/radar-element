@@ -24,8 +24,6 @@ npm i radar-element
 
 In the example we have used the Angular notation for binding directly to properties. For a binding via native html the arrays have to be converted via `JSON.stringify()`.
 
-## Configuration
-
 ### Properties
 #### diameter
 The diameter of the whole SVG.
@@ -45,7 +43,6 @@ The diameter of the whole SVG.
 }
 ```
 
-
 | Parameter         | Data-Type     | Description                                                                                       |
 | ----------------- | ------------- | ------------------------------------------------------------------------------------------------- |
 | id                | `string`      | The id of the ring                                                                                |
@@ -60,7 +57,6 @@ The *entryStyle* exhibits the following config-parameters:
 | ----------------- | ------------- | ------------------------------------------------------------------------------------------------- |
 | color             | `string`      | The color of the entry's circle                                                                   |
 | labelColor        | `string`      | The color of the entry's label                                                                    |
-
 
 #### section-config
 
@@ -98,7 +94,6 @@ The *entryStyle* exhibits the following config-parameters:
 | ringId            | `string`      | The id of the ring that entry belongs to                            |
 | link              | `string`      | A link the user shall be redirected to, when clicking on the entry  |
 
-
 #### highlight- & unhighlight-entry
 The radar-element will fire the "highlight-entry" event whenever the mouse is placed above on entry and the tooltip appears. The event will contain the following data-structure:
 
@@ -121,9 +116,7 @@ The following css properties can be used to style the radar.
 | --grid-color                      | `Color`       | The color of the grid of the radar.   |
 | --tooltip-background-color        | `Color`       | The background color of the tooltip.  |
 
-
 ## Development
-
 ### Overview
 The whole application is designed to be lightweight and that it must integrate easily in all different kinds of applications. 
 Therefore, we chose the web-components standard for implementation.  
@@ -152,16 +145,22 @@ The application is structured as follows:
 ..../radar-element.ts - contains test for the web-component
 /custom-elements.json - custom element manifest file
 /index.ts - the entry point if this whole package is included via npm
-/radar-element.ts - wrapper code for importing the backing class and registering it as a custom element
 ```
 Some standard files (like `LICENSE`, or `package.json`) are omitted for brevity. 
 
-### Local Demo with `web-dev-server`
+### Run locally with with `web-dev-server`
+Install dependencies
+
+```bash
+npm install
+```
+
+Run the server
+
 ```bash
 npm start
 ```
-To run a local development server that serves the basic demo located in `demo/index.html`
-
+This will serve the basic demo located in `demo/index.html`.
 
 ### Linting with ESLint, Prettier, and Types
 To scan the project for linting errors, run
@@ -190,22 +189,41 @@ npm run format:eslint
 npm run format:prettier
 ```
 
-### Testing with Web Test Runner
+### Testing with `web-test-runner`
 To run the suite of Web Test Runner tests, run
 ```bash
 npm run test
 ```
 
-To run the tests in watch mode (for &lt;abbr title=&#34;test driven development&#34;&gt;TDD&lt;/abbr&gt;, for example), run
+To run the tests in watch mode run
 
 ```bash
 npm run test:watch
 ```
 
-
 ### Tooling configs
 
 For most of the tools, the configuration is in the `package.json` to reduce the amount of files in your project.
 
-If you customize the configuration a lot, you can consider moving them to individual files.
+## License
+MIT License
 
+Copyright (c) 2021 Felix Thiele (dev@felix-thiele.eu)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
