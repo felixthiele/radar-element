@@ -115,8 +115,13 @@
 
   render(
     html`
-      <radar-element diameter="800" .ringConfigs="${rings}" .sectionConfigs="${sections}"
-                     .entryConfigs="${entries}"></radar-element>
+      <radar-element diameter="800" 
+        .ringConfigs="${rings}" 
+        .sectionConfigs="${sections}"
+        .entryConfigs="${entries}" 
+        @entry-highlighted="${(e) => { window.console.log(e) }}" 
+        @entry-unhighlighted="${(e) => { window.console.log(e) }}">
+      </radar-element>
     `,
     document.querySelector('#demo')
   );

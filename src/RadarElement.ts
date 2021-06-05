@@ -1,13 +1,13 @@
-import {css, html, LitElement, property, PropertyValues} from 'lit-element';
+import { css, html, LitElement, property, PropertyValues } from 'lit-element';
 
-import {translate} from "./utils/svg.utils";
-import {generateGrid} from "./generators/grid-generator";
-import {computeDefaultRadius, Ring} from "./domain/ring";
-import {getRadialMax, getRadialMin, Section} from "./domain/section";
-import {generateEntries} from "./generators/entry-generator";
-import {Segment} from "./domain/segment";
-import {Entry, EntryStyle} from "./domain/entry";
-import {generateTooltip} from "./generators/tooltip-generator";
+import { translate } from './utils/svg.utils';
+import { generateGrid } from './generators/grid-generator';
+import { computeDefaultRadius, Ring } from './domain/ring';
+import { getRadialMax, getRadialMin, Section } from './domain/section';
+import { generateEntries } from './generators/entry-generator';
+import { Segment } from './domain/segment';
+import { Entry, EntryStyle } from './domain/entry';
+import { generateTooltip } from './generators/tooltip-generator';
 
 interface RingConfig {
   id: string;
@@ -89,7 +89,7 @@ export class RadarElement extends LitElement {
       box-shadow-x: 1px;
       box-shadow-y: 1px;
       box-shadow-blur: 19px;
-      box-shadow-color: rgba(0,0,0,0.3);
+      box-shadow-color: rgba(0, 0, 0, 0.3);
     }
 
     .tooltip-label {
@@ -121,23 +121,22 @@ export class RadarElement extends LitElement {
   /**
    * The configuration for the rings of the radar.
    */
-  @property({type: Array}) ringConfigs: Array<RingConfig> = [];
-
+  @property({ type: Array }) ringConfigs: Array<RingConfig> = [];
 
   /**
    * The configuration for the sections of the radar.
    */
-  @property({type: Array}) sectionConfigs: Array<SectionConfig> = [];
+  @property({ type: Array }) sectionConfigs: Array<SectionConfig> = [];
 
   /**
    * The configuration for the entries of the radar.
    */
-  @property({type: Array}) entryConfigs: Array<EntryConfig> = [];
+  @property({ type: Array }) entryConfigs: Array<EntryConfig> = [];
 
   /**
    * The currently highlighted entry.
    */
-  @property({type: Object}) highlightedEntry?: Entry;
+  @property({ type: Object }) highlightedEntry?: Entry;
 
   private rings: Ring[] = [];
 
@@ -147,22 +146,39 @@ export class RadarElement extends LitElement {
 
   highlightEntry(entry: Entry) {
     this.highlightedEntry = entry;
+    const event = new CustomEvent('entry-highlighted', {
+      detail: {
+        entryId: entry.id,
+      },
+    });
+    this.dispatchEvent(event);
   }
 
   unhighlightEntry() {
     this.highlightedEntry = undefined;
+    const event = new CustomEvent('entry-unhighlighted');
+    this.dispatchEvent(event);
   }
 
   render() {
     return html`
       <svg width="${this.diameter}" height="${this.diameter}">
-        <g id="center" transform="${translate(this.diameter / 2, this.diameter / 2)}">
+        <g
+          id="center"
+          transform="${translate(this.diameter / 2, this.diameter / 2)}"
+        >
           ${generateGrid(this.rings, this.sections)}
-          ${generateEntries(this.entries, this.highlightEntry.bind(this), this.unhighlightEntry.bind(this))}
+          ${generateEntries(
+            this.entries,
+            this.highlightEntry.bind(this),
+            this.unhighlightEntry.bind(this)
+          )}
         </g>
       </svg>
       <div id="tooltip-container" class="tooltip-container">
-        ${this.highlightedEntry ? generateTooltip(this.highlightedEntry, this.diameter / 2) : ""}
+        ${this.highlightedEntry
+          ? generateTooltip(this.highlightedEntry, this.diameter / 2)
+          : ''}
       </div>
     `;
   }
@@ -189,7 +205,7 @@ export class RadarElement extends LitElement {
       }
 
       this.rings.push(ring);
-    })
+    });
 
     this.sectionConfigs.forEach((sectionConfig, sectionIndex) => {
       const section: Section = {
@@ -200,18 +216,17 @@ export class RadarElement extends LitElement {
 
       this.sections.push(section);
 
-      this.rings.forEach((ring) => {
+      this.rings.forEach(ring => {
         const segment = new Segment(ring, section);
 
         this.entryConfigs
-          .filter((e) => e.sectionId === sectionConfig.id && e.ringId === ring.id)
+          .filter(e => e.sectionId === sectionConfig.id && e.ringId === ring.id)
           .sort((a, b) => a.labelLong.localeCompare(b.labelLong))
-          .map((e) => segment.generateEntry(e, ring.entryStyle))
-          .forEach((e) => this.entries.push(e));
+          .map(e => segment.generateEntry(e, ring.entryStyle))
+          .forEach(e => this.entries.push(e));
       });
     });
 
-    this.update(_changedProperties)
+    this.update(_changedProperties);
   }
-
 }

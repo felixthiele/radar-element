@@ -12,7 +12,14 @@ npm i radar-element
   import 'radar-element/radar-element.js';
 </script>
 
-<radar-element diameter="800" [ringConfigs]="rings" [sectionConfigs]="sections" [entryConfigs]="entries"></radar-element>
+<radar-element 
+  diameter="800"
+  [ringConfigs]="rings"
+  [sectionConfigs]="sections"
+  [entryConfigs]="entries"
+  (highlight-entry)="onHighlightEntry()"
+  (unhighlight-entry)= "onUnhighligthEntry()">
+</radar-element>
 ```
 
 In the example we have used the Angular notation for binding directly to properties. For a binding via native html the arrays have to be converted via `JSON.stringify()`.
@@ -88,6 +95,19 @@ The *entryStyle* exhibits the following config-parameters:
 | ringId            | `string`      | The id of the ring that entry belongs to                            |
 | link              | `string`      | A link the user shall be redirected to, when clicking on the entry  |
 
+
+#### highlight- & unhighlight-entry
+The radar-element will fire the "highlight-entry" event whenever the mouse is placed above on entry and the tooltip appears. The event will contain the following data-structure:
+
+```Javascript
+detail: {
+  entryId: "The ID of the entry that has been passed in through the entry-config"
+}
+```
+
+This can be used to e.g. synchronize the highlighting with another structure outside of the radar-element.
+
+The "unhighlight-entry" event will be fired, whenever the entry is not highlighted anymore and does not contain any detail payload.
 
 ### CSS properties
 The following css properties can be used to style the radar.
