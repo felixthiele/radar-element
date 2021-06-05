@@ -3,8 +3,8 @@
   "version": "0.9.0",
   "description": "A component to render a radar visualization consisting of rings, sections and entries.",
   "author": {
-    "name" : "Felix Thiele",
-    "email" : "dev@felix-thiele.eu"
+    "name": "Felix Thiele",
+    "email": "dev@felix-thiele.eu"
   },
   "license": "MIT",
   "main": "dist/index.js",

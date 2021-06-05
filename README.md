@@ -143,7 +143,6 @@ The application is structured as follows:
 ..../generators - contains tests for the generators
 ..../utils - contains tests for the utils
 ..../radar-element.ts - contains test for the web-component
-/custom-elements.json - custom element manifest file
 /index.ts - the entry point if this whole package is included via npm
 ```
 Some standard files (like `LICENSE`, or `package.json`) are omitted for brevity. 
