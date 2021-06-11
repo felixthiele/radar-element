@@ -1,9 +1,9 @@
 # \<radar-element>
 This web-component shall give users an easy and highly configurable way of creating their own tech-, trend- or ...-radar. 
 
-![A TechRadar showing 4 entries in the languages section with a tooltip showing for the entry Kotlin](docs/radar-element.png)
-
 You may customize the number, styling and name of rings, the number and name of the sections and add entries to those sections. Additionally, your host-application can set the highlighted entry from outside (making the radar-element show a tooltip) and be informed via an event, whenever the user mouses over an entry.
+
+![A TechRadar showing 4 entries in the languages section with a tooltip showing for the entry Kotlin](docs/radar-element.png)
 
 The web-component follows the [open-wc](https://github.com/open-wc/open-wc) recommendations.
 
@@ -53,6 +53,17 @@ Next you simple instantiate the element in the HTML and pass the properties / ev
 </radar-element>
 ```
 
+To make Angular understand this component you'll have to add the following to your module:
+```javascript
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+@NgModule({
+  ...
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  ...
+})
+```
+
 Another example on how to use this element via lit-html can be found in `demo/index.html`.
 
 ### Properties
@@ -82,7 +93,7 @@ The diameter of the whole SVG.
 | headlineColor     | `string`      | The color of the headline. Make sure that it has enough contrast to the ring's *backgroundColor*  |
 | entryStyle        | `{}`          | The styling of the entries belonging to that ring
 
-The *entryStyle* exhibits the following config-parameters:
+The `entryStyle` exhibits the following config-parameters:
 
 | Parameter         | Data-Type     | Description                                                                                       |
 | ----------------- | ------------- | ------------------------------------------------------------------------------------------------- |
