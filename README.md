@@ -3,7 +3,7 @@ This web-component shall give users an easy and highly configurable way of creat
 
 You may customize the number, styling and name of rings, the number and name of the sections and add entries to those sections. Additionally, your host-application can set the highlighted entry from outside (making the radar-element show a tooltip) and be informed via an event, whenever the user mouses over an entry.
 
-![A TechRadar showing 4 entries in the languages section with a tooltip showing for the entry Kotlin](docs/radar-element.png)
+![A TechRadar showing 4 entries in the languages section with a tooltip showing for the entry Kotlin](https://raw.githubusercontent.com/felixthiele/radar-element/main/docs/radar-element.png)
 
 The web-component follows the [open-wc](https://github.com/open-wc/open-wc) recommendations.
 
