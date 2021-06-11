@@ -1,9 +1,11 @@
 # \<radar-element>
-This web-component shall give users an easy and configurable way of creating their own tech-, trend- or ...-radar. 
+This web-component shall give users an easy and highly configurable way of creating their own tech-, trend- or ...-radar. 
 
 ![A TechRadar showing 4 entries in the languages section with a tooltip showing for the entry Kotlin](docs/radar-element.png)
 
-The web-component follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
+You may customize the number, styling and name of rings, the number and name of the sections and add entries to those sections. Additionally, your host-application can set the highlighted entry from outside (making the radar-element show a tooltip) and be informed via an event, whenever the user mouses over an entry.
+
+The web-component follows the [open-wc](https://github.com/open-wc/open-wc) recommendations.
 
 ## Installation
 ```bash
@@ -11,22 +13,47 @@ npm i radar-element
 ```
 
 ## Usage
-```html
-<script type="module">
-  import 'radar-element/radar-element.js';
-</script>
+To include this element in e.g. an Angular project, you must first import it into your Angular component and define the properties:
 
+```javascript
+import 'radar-element';
+import { Component } from '@angular/core';
+
+@Component({
+  ...
+})
+export class AppComponent {
+  title = 'test';
+
+  rings = [...];
+
+  sections = [...];
+
+  entries = [...];
+
+  onHighlightEntry() {
+    ...
+  }
+
+  onUnhighlightEntry() {
+    ...
+  }
+}
+```
+
+Next you simple instantiate the element in the HTML and pass the properties / event-bindings:
+```html
 <radar-element 
   diameter="800"
   [ringConfigs]="rings"
   [sectionConfigs]="sections"
   [entryConfigs]="entries"
-  (highlight-entry)="onHighlightEntry()"
-  (unhighlight-entry)= "onUnhighligthEntry()">
+  (entry-highlighted)="onHighlightEntry()"
+  (entry-unhighlighted)= "onUnhighligthEntry()">
 </radar-element>
 ```
 
-In the example we have used the Angular notation for binding directly to properties. For a binding via native html the arrays have to be converted via `JSON.stringify()`.
+Another example on how to use this element via lit-html can be found in `demo/index.html`.
 
 ### Properties
 #### diameter
@@ -98,8 +125,8 @@ The *entryStyle* exhibits the following config-parameters:
 | ringId            | `string`      | The id of the ring that entry belongs to                            |
 | link              | `string`      | A link the user shall be redirected to, when clicking on the entry  |
 
-#### highlight- & unhighlight-entry
-The radar-element will fire the "highlight-entry" event whenever the mouse is placed above on entry and the tooltip appears. The event will contain the following data-structure:
+#### entry-highlighted- & -unhighlighted
+The radar-element will fire the `entry-highlighted` event whenever the mouse is placed above on entry and the tooltip appears. The event will contain the following data-structure:
 
 ```Javascript
 detail: {
@@ -109,7 +136,7 @@ detail: {
 
 This can be used to e.g. synchronize the highlighting with another structure outside of the radar-element.
 
-The "unhighlight-entry" event will be fired, whenever the entry is not highlighted anymore and does not contain any detail payload.
+The `entry-unhighlighted` event will be fired, whenever the entry is not highlighted anymore and does not contain any detail payload.
 
 ### CSS properties
 The following css properties can be used to style the radar.
@@ -136,17 +163,17 @@ The application is structured as follows:
 
 ```
 /
-../demo
-..../index.html - a simple page to integrate the element to for testing purposes
-../src
-..../domain - contains the domain objects 
-..../generators - contains pure functions that generate SVG or HTML code based on input parameters
-..../utils - basic math and svg utilities
-..../RadarElements.ts - the backing class for the web component implementation
-../test
-..../generators - contains tests for the generators
-..../utils - contains tests for the utils
-..../radar-element.ts - contains test for the web-component
+  /demo
+    /index.html - a simple page to integrate the element to for testing purposes
+  /src
+    /domain - contains the domain objects 
+    /generators - contains pure functions that generate SVG or HTML code based on input parameters
+    /utils - basic math and svg utilities
+    /RadarElements.ts - the backing class for the web component implementation
+  test
+    /generators - contains tests for the generators
+    /utils - contains tests for the utils
+    /radar-element.ts - contains test for the web-component
 /index.ts - the entry point if this whole package is included via npm
 ```
 Some standard files (like `LICENSE`, or `package.json`) are omitted for brevity. 
