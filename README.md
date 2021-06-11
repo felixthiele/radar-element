@@ -1,5 +1,9 @@
 # \<radar-element>
-This web-component shall give users an easy and configurable way of creating their own tech-, trend- or ...-radar. The web-component follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
+This web-component shall give users an easy and configurable way of creating their own tech-, trend- or ...-radar. 
+
+![A TechRadar showing 4 entries in the languages section with a tooltip showing for the entry Kotlin](docs/radar-element.png)
+
+The web-component follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
 ## Installation
 ```bash
