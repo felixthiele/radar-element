@@ -13,7 +13,7 @@
     "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\"",
     "build": "tsc",
     "prepare": "tsc",
-    "lint": "eslint --ext .ts,.html . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
+    "lint": "eslint --ext .ts . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
     "format": "eslint --ext .ts,.html . --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
     "test": "tsc && wtr --coverage",
     "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\""
@@ -24,7 +24,6 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@open-wc/eslint-config": "^0.3.12",
     "@open-wc/testing": "^2.5.32",
     "@typescript-eslint/eslint-plugin": "^4.15.0",
     "@typescript-eslint/parser": "^4.15.0",
@@ -41,7 +40,6 @@
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
     "extends": [
-      "@open-wc/eslint-config",
       "eslint-config-prettier"
     ],
     "plugins": [
