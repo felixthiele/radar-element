@@ -190,11 +190,11 @@ The `entry-unhighlighted` event will be fired, whenever the entry is not highlig
 ### CSS properties
 The following css properties can be used to style the radar.
 
-| Parameter                         | Data-Type     | Description                           |
-| --------------------------------- | ------------- | ------------------------------------- |
-| --radar-element-background-color  | `Color`       | The background color of the radar.    |
-| --grid-color                      | `Color`       | The color of the grid of the radar.   |
-| --tooltip-background-color        | `Color`       | The background color of the tooltip.  |
+| Parameter                                   | Data-Type     | Description                           |
+| ------------------------------------------- | ------------- | ------------------------------------- |
+| --radar-element-background-color            | `Color`       | The background color of the radar.    |
+| --radar-element-grid-color                  | `Color`       | The color of the grid of the radar.   |
+| --radar-element-tooltip-background-color    | `Color`       | The background color of the tooltip.  |
 
 ## Development
 ### Overview

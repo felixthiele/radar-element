@@ -67,7 +67,7 @@ export class RadarElement extends LitElement {
     }
 
     .section {
-      stroke: var(--grid-color, #fff);
+      stroke: var(--radar-element-grid-color, #fff);
       stroke-width: 1px;
     }
 
@@ -78,7 +78,7 @@ export class RadarElement extends LitElement {
     }
 
     .ring {
-      stroke: var(--grid-color, #fff);
+      stroke: var(--radar-element-grid-color, #fff);
       stroke-width: 1px;
     }
 
@@ -102,7 +102,7 @@ export class RadarElement extends LitElement {
 
     .tooltip {
       display: grid;
-      background-color: var(--tooltip-background-color, #fff);
+      background-color: var(--radar-element-tooltip-background-color, #fff);
       grid-template-rows: 15px 25px;
       grid-template-columns: 40px 150px;
       grid-column-gap: 5px;
@@ -145,17 +145,20 @@ export class RadarElement extends LitElement {
   /**
    * The configuration for the rings of the radar.
    */
-  @property({ type: Array, attribute: 'ring-configs' }) ringConfigs: Array<RingConfig> = [];
+  @property({ type: Array, attribute: 'ring-configs' })
+  ringConfigs: Array<RingConfig> = [];
 
   /**
    * The configuration for the sections of the radar.
    */
-  @property({ type: Array, attribute: 'section-configs' }) sectionConfigs: Array<SectionConfig> = [];
+  @property({ type: Array, attribute: 'section-configs' })
+  sectionConfigs: Array<SectionConfig> = [];
 
   /**
    * The configuration for the entries of the radar.
    */
-  @property({ type: Array, attribute: 'entry-configs' }) entryConfigs: Array<EntryConfig> = [];
+  @property({ type: Array, attribute: 'entry-configs' })
+  entryConfigs: Array<EntryConfig> = [];
 
   /**
    * The currently highlighted entry.
