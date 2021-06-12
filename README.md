@@ -13,6 +13,37 @@ npm i radar-element
 ```
 
 ## Usage
+
+<details>
+<summary>Native HTML & JS</summary>
+
+```html
+<script type="module">
+  import 'radar-element';  
+</script>
+
+<radar-element diameter="800"></radar-element>
+
+<script>
+  const rings = JSON.stringify([...]);
+  const sections = JSON.stringify([...]);
+  const entries = JSON.stringify([...]);
+
+  const radar = document.getElementsByTagName("radar-element")[0];
+
+  radar.setAttribute("ringConfigs", rings);
+  radar.setAttribute('sectionConfigs', sections);
+  radar.setAttribute('entryConfigs', entries);
+
+  radar.addEventListener('entry-highlighted', function(e) {...})
+  radar.addEventListener('entry-unhighlighted', function() {...});
+</script>
+```
+</details>
+
+<details>
+<summary>Angular</summary>
+
 To include this element in e.g. an Angular project, you must first import it into your Angular component and define the properties:
 
 ```javascript
@@ -63,8 +94,13 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   ...
 })
 ```
+</details>
+
+<details>
+<summary>lit-html</summary>
 
 Another example on how to use this element via lit-html can be found in `demo/index.html`.
+</details>
 
 ### Properties
 #### diameter
