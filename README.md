@@ -35,8 +35,8 @@ npm i radar-element
   radar.setAttribute('section-configs', sections);
   radar.setAttribute('entry-configs', entries);
 
-  radar.addEventListener('entry-highlighted', function(e) {...})
-  radar.addEventListener('entry-unhighlighted', function() {...});
+  radar.addEventListener('entry-mouseover', function(e) {...})
+  radar.addEventListener('entry-mouseout', function() {...});
 </script>
 ```
 </details>
@@ -79,8 +79,8 @@ Next you simple instantiate the element in the HTML and pass the properties / ev
   [ringConfigs]="rings"
   [sectionConfigs]="sections"
   [entryConfigs]="entries"
-  (entry-highlighted)="onHighlightEntry()"
-  (entry-unhighlighted)= "onUnhighligthEntry()">
+  (entry-mouseover)="onHighlightEntry()"
+  (entry-mouseout)= "onUnhighligthEntry()">
 </radar-element>
 ```
 
@@ -174,8 +174,8 @@ The `entryStyle` exhibits the following config-parameters:
 | ringId            | `string`      | The id of the ring that entry belongs to                            |
 | link              | `string`      | A link the user shall be redirected to, when clicking on the entry  |
 
-#### entry-highlighted- & -unhighlighted
-The radar-element will fire the `entry-highlighted` event whenever the mouse is placed above on entry and the tooltip appears. The event will contain the following data-structure:
+#### entry-mouseover & -mouseout
+The radar-element will fire the `entry-mouseover` event whenever the mouse is placed above on entry and the tooltip appears. The event will contain the following data-structure:
 
 ```Javascript
 detail: {
@@ -185,7 +185,7 @@ detail: {
 
 This can be used to e.g. synchronize the highlighting with another structure outside of the radar-element.
 
-The `entry-unhighlighted` event will be fired, whenever the entry is not highlighted anymore and does not contain any detail payload.
+The `entry-mouseout` event will be fired, whenever the entry is not highlighted anymore and does not contain any detail payload.
 
 ### CSS properties
 The following css properties can be used to style the radar.

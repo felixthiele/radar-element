@@ -173,7 +173,7 @@ export class RadarElement extends LitElement {
 
   highlightEntry(entry: Entry) {
     this.highlightedEntry = entry;
-    const event = new CustomEvent('entry-highlighted', {
+    const event = new CustomEvent('entry-mouseover', {
       detail: {
         entryId: entry.id,
       },
@@ -183,7 +183,7 @@ export class RadarElement extends LitElement {
 
   unhighlightEntry() {
     this.highlightedEntry = undefined;
-    const event = new CustomEvent('entry-unhighlighted');
+    const event = new CustomEvent('entry-mouseout');
     this.dispatchEvent(event);
   }
 

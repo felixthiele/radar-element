@@ -119,8 +119,8 @@
         .ringConfigs="${rings}" 
         .sectionConfigs="${sections}"
         .entryConfigs="${entries}" 
-        @entry-highlighted="${(e) => { window.console.log(e) }}" 
-        @entry-unhighlighted="${(e) => { window.console.log(e) }}">
+        @entry-mouseover="${(e) => { window.console.log(e) }}" 
+        @entry-mouseout="${(e) => { window.console.log(e) }}">
       </radar-element>
     `,
     document.querySelector('#demo')
