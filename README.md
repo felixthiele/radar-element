@@ -190,11 +190,15 @@ The `entry-mouseout` event will be fired, whenever the entry is not highlighted 
 ### CSS properties
 The following css properties can be used to style the radar.
 
-| Parameter                                   | Data-Type     | Description                           |
-| ------------------------------------------- | ------------- | ------------------------------------- |
-| --radar-element-background-color            | `Color`       | The background color of the radar.    |
-| --radar-element-grid-color                  | `Color`       | The color of the grid of the radar.   |
-| --radar-element-tooltip-background-color    | `Color`       | The background color of the tooltip.  |
+| Parameter                                   | Data-Type     | Description                               |
+| ------------------------------------------- | ------------- | ----------------------------------------- |
+| --radar-element-background-color            | `Color`       | The background color of the radar.        |
+| --radar-element-grid-color                  | `Color`       | The color of the grid of the radar.       |
+| --radar-element-section-color               | `Color`       | The color of the section label.           |
+| --radar-element-tooltip-background-color    | `Color`       | The background color of the tooltip.      |
+| --radar-element-tooltip-accent-color        | `Color`       | The color of the tooltips bottom border.  |
+| --radar-element-tooltip-label-color         | `Color`       | The color of the tooltips label.          |
+| --radar-element-tooltip-section-color       | `Color`       | The color of the tooltips section label.  |
 
 ## Development
 ### Overview

@@ -75,6 +75,7 @@ export class RadarElement extends LitElement {
       font-size: 16px;
       pointer-events: none;
       user-select: none;
+      fill: var(--radar-element-section-color, #fff);
     }
 
     .ring {
@@ -108,7 +109,7 @@ export class RadarElement extends LitElement {
       grid-column-gap: 5px;
       border-bottom-width: 5px;
       border-bottom-style: solid;
-      border-bottom-color: #841339;
+      border-bottom-color: var(--radar-element-tooltip-accent-color, #000);
       z-index: 1;
       box-shadow-x: 1px;
       box-shadow-y: 1px;
@@ -125,10 +126,11 @@ export class RadarElement extends LitElement {
       text-overflow: ellipsis;
       padding-left: 10px;
       grid-column: 1 / -1;
+      color: var(--radar-element-tooltip-label-color, #000);
     }
 
     .tooltip-section {
-      color: #841339;
+      color: var(--radar-element-tooltip-section-color, #000);
       font-size: 8px;
       text-transform: uppercase;
       align-self: end;
