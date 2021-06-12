@@ -145,17 +145,17 @@ export class RadarElement extends LitElement {
   /**
    * The configuration for the rings of the radar.
    */
-  @property({ type: Array }) ringConfigs: Array<RingConfig> = [];
+  @property({ type: Array, attribute: 'ring-configs' }) ringConfigs: Array<RingConfig> = [];
 
   /**
    * The configuration for the sections of the radar.
    */
-  @property({ type: Array }) sectionConfigs: Array<SectionConfig> = [];
+  @property({ type: Array, attribute: 'section-configs' }) sectionConfigs: Array<SectionConfig> = [];
 
   /**
    * The configuration for the entries of the radar.
    */
-  @property({ type: Array }) entryConfigs: Array<EntryConfig> = [];
+  @property({ type: Array, attribute: 'entry-configs' }) entryConfigs: Array<EntryConfig> = [];
 
   /**
    * The currently highlighted entry.

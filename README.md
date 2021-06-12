@@ -31,9 +31,9 @@ npm i radar-element
 
   const radar = document.getElementsByTagName("radar-element")[0];
 
-  radar.setAttribute("ringConfigs", rings);
-  radar.setAttribute('sectionConfigs', sections);
-  radar.setAttribute('entryConfigs', entries);
+  radar.setAttribute("ring-configs", rings);
+  radar.setAttribute('section-configs', sections);
+  radar.setAttribute('entry-configs', entries);
 
   radar.addEventListener('entry-highlighted', function(e) {...})
   radar.addEventListener('entry-unhighlighted', function() {...});
@@ -103,10 +103,12 @@ Another example on how to use this element via lit-html can be found in `demo/in
 </details>
 
 ### Properties
+All properties can be converted to attributes by going from camelCase (e.g. ringConfig) to kebap-case (e.g. ring-config). Properties can be bound by applications like Angular or lit-html, while Attributes have to be used in native HTML.
+
 #### diameter
 The diameter of the whole SVG.
 
-#### ring-config
+#### ringConfig (ring-config)
 
 ```json
 {
@@ -136,7 +138,7 @@ The `entryStyle` exhibits the following config-parameters:
 | color             | `string`      | The color of the entry's circle                                                                   |
 | labelColor        | `string`      | The color of the entry's label                                                                    |
 
-#### section-config
+#### sectionConfig (section-config)
 
 ```json
 {
@@ -150,7 +152,7 @@ The `entryStyle` exhibits the following config-parameters:
 | id                | `string`      | The id of the section                                               |
 | displayName       | `string`      | The name of the section that should be displayed                    | 
 
-#### entry-config
+#### entryConfig (entry-config)
 
 ```json
 {
