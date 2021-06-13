@@ -75,7 +75,7 @@ export class RadarElement extends LitElement {
       font-size: 16px;
       pointer-events: none;
       user-select: none;
-      fill: var(--radar-element-section-color, #fff);
+      fill: var(--radar-element-section-color, #000);
     }
 
     .ring {
