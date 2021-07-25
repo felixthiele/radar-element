@@ -1,7 +1,7 @@
 # \<radar-element>
 This web-component shall give users an easy and highly configurable way of creating their own tech-, trend- or ...-radar. 
 
-You may customize the number, styling and name of rings, the number and name of the sections and add entries to those sections. Additionally, your host-application can set the highlighted entry from outside (making the radar-element show a tooltip) and be informed via an event, whenever the user mouses over an entry.
+You may customize the number, styling and name of rings, the number and name of the sections and add entries to those sections. Additionally, your host-application can set the highlighted entry from outside (making the radar-element show a tooltip) and be informed via an event, whenever the user mouses over or clicks an entry.
 
 <p>
   <img src="https://raw.githubusercontent.com/felixthiele/radar-element/main/docs/radar-element.png" width="49%" alt="A TechRadar showing 4 entries in the languages section with a tooltip showing for the entry Kotlin" />
@@ -40,6 +40,7 @@ npm i radar-element
 
   radar.addEventListener('entry-mouseover', function(e) {...})
   radar.addEventListener('entry-mouseout', function() {...});
+  radar.addEventListener('entry-click', function() {...});
 </script>
 ```
 </details>
@@ -72,6 +73,10 @@ export class AppComponent {
   onUnhighlightEntry() {
     ...
   }
+ 
+  onClickEntry() {
+    ...
+  }
 }
 ```
 
@@ -83,7 +88,8 @@ Next you simple instantiate the element in the HTML and pass the properties / ev
   [sectionConfigs]="sections"
   [entryConfigs]="entries"
   (entry-mouseover)="onHighlightEntry()"
-  (entry-mouseout)= "onUnhighligthEntry()">
+  (entry-mouseout)="onUnhighligthEntry()"
+  (entry-click)="onClickEntry()">
 </radar-element>
 ```
 
@@ -164,18 +170,18 @@ The `entryStyle` exhibits the following config-parameters:
   "labelLong": "TypeScript",
   "sectionId": "languages",
   "ringId": "adopt",
-  "link": "https://www.typescriptlang.org/"
+  "clickable": true
 }
 ```
 
-| Parameter         | Data-Type     | Description                                                         |
-| ----------------- | ------------- | ------------------------------------------------------------------- |
-| id                | `string`      | The id of the entry                                                 |
-| labelShort        | `string`      | The character that should be printed on the entries circle.         |
-| labelLong         | `string`      | The label of the entry                                              |
-| sectionId         | `string`      | The id of the section that entry belongs to                         |
-| ringId            | `string`      | The id of the ring that entry belongs to                            |
-| link              | `string`      | A link the user shall be redirected to, when clicking on the entry  |
+| Parameter         | Data-Type     | Description                                                           |
+| ----------------- | ------------- | --------------------------------------------------------------------- |
+| id                | `string`      | The id of the entry                                                   |
+| labelShort        | `string`      | The character that should be printed on the entries circle.           |
+| labelLong         | `string`      | The label of the entry                                                |
+| sectionId         | `string`      | The id of the section that entry belongs to                           |
+| ringId            | `string`      | The id of the ring that entry belongs to                              |
+| clickable         | `boolean`     | Marks the element as clickable making it fire the `entry-click` event |
 
 #### entry-mouseover & -mouseout
 The radar-element will fire the `entry-mouseover` event whenever the mouse is placed above on entry and the tooltip appears. The event will contain the following data-structure:
@@ -189,6 +195,17 @@ detail: {
 This can be used to e.g. synchronize the highlighting with another structure outside of the radar-element.
 
 The `entry-mouseout` event will be fired, whenever the entry is not highlighted anymore and does not contain any detail payload.
+
+#### entry-click
+For entries where `clickable` is set to true, the radar-element will fire the `entry-click` event whenever the user clicks on that entry. The event will contain the following data-structure:
+
+```Javascript
+detail: {
+  entryId: "The ID of the entry that has been passed in through the entry-config"
+}
+```
+
+This can be used to e.g. open a new tab with further information regarding the entry or display a modal dialog.
 
 ### CSS properties
 The following css properties can be used to style the radar.

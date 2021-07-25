@@ -52,7 +52,7 @@ export interface EntryConfig {
   labelLong: string;
   sectionId: string;
   ringId: string;
-  link?: string;
+  clickable?: boolean;
 }
 
 export class RadarElement extends LitElement {
@@ -189,6 +189,15 @@ export class RadarElement extends LitElement {
     this.dispatchEvent(event);
   }
 
+  clickEntry(entry: Entry) {
+    const event = new CustomEvent('entry-click', {
+      detail: {
+        entryId: entry.id,
+      },
+    });
+    this.dispatchEvent(event);
+  }
+
   render() {
     return html`
       <svg width="${this.diameter}" height="${this.diameter}">
@@ -200,7 +209,8 @@ export class RadarElement extends LitElement {
           ${generateEntries(
             this.entries,
             this.highlightEntry.bind(this),
-            this.unhighlightEntry.bind(this)
+            this.unhighlightEntry.bind(this),
+            this.clickEntry.bind(this)
           )}
         </g>
       </svg>

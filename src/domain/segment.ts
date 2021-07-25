@@ -79,7 +79,7 @@ export class Segment {
       id: string;
       labelShort: string;
       labelLong: string;
-      link?: string;
+      clickable?: boolean;
     },
     style: EntryStyle
   ): Entry {

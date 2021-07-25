@@ -109,18 +109,19 @@
       labelLong: "Kotlin",
       sectionId: "languages",
       ringId: "trial",
-      link: "https://kotlinlang.org/",
+      clickable: true
     }
   ]
 
   render(
     html`
-      <radar-element diameter="800" 
-        .ringConfigs="${rings}" 
+      <radar-element diameter="800"
+        .ringConfigs="${rings}"
         .sectionConfigs="${sections}"
-        .entryConfigs="${entries}" 
-        @entry-mouseover="${(e) => { window.console.log(e) }}" 
-        @entry-mouseout="${(e) => { window.console.log(e) }}">
+        .entryConfigs="${entries}"
+        @entry-mouseover="${(e) => { window.console.log(e) }}"
+        @entry-mouseout="${(e) => { window.console.log(e) }}"
+        @entry-click="${(e) => { window.console.log(e) }}">
       </radar-element>
     `,
     document.querySelector('#demo')

@@ -39,6 +39,6 @@ export interface Entry {
   labelLong: string;
   x: number;
   y: number;
-  link?: string;
+  clickable?: boolean;
   style: EntryStyle;
 }

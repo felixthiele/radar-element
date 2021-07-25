@@ -27,7 +27,7 @@ import { styleMap } from 'lit-html/directives/style-map';
 import { Entry } from '../domain/entry';
 import { translate } from '../utils/svg.utils';
 
-function generateEntry(entry: Entry) {
+function generateEntry(entry: Entry, clickEntry: (entry: Entry) => void) {
   const circleStyle = styleMap({
     fill: entry.style.color,
   });
@@ -38,23 +38,24 @@ function generateEntry(entry: Entry) {
     textAnchor: 'middle',
   });
 
-  return entry.link
-    ? svg`
-        <a href="${entry.link}" target="_blank">
+  const groupStyle = styleMap({
+    cursor: entry.clickable ? 'pointer' : 'auto',
+  });
+
+  return svg`
+        <g @click="${() =>
+          entry.clickable && clickEntry(entry)}" style="${groupStyle}">
             <circle r="9" style="${circleStyle}" "></circle>
             <text y="3" style="${textStyle}">${entry.labelShort}</text>
-        </a>
-    `
-    : svg`
-        <circle r="9" style="${circleStyle}"></circle>
-        <text y="3" style="${textStyle}">${entry.labelShort}</text>
+        </g>
     `;
 }
 
 function generateEntryContainer(
   entry: Entry,
   highlightEntry: (selectedEntry: Entry) => void,
-  unhighlightEntry: () => void
+  unhighlightEntry: () => void,
+  clickEntry: (entry: Entry) => void
 ) {
   return svg`
     <g class="entry" id="entry-${entry.id}" transform="${translate(
@@ -62,7 +63,7 @@ function generateEntryContainer(
     entry.y
   )}" @mouseover="${() =>
     highlightEntry(entry)}" @mouseout="${unhighlightEntry}">
-        ${generateEntry(entry)}
+        ${generateEntry(entry, clickEntry)}
     </g>
   `;
 }
@@ -70,12 +71,18 @@ function generateEntryContainer(
 export function generateEntries(
   entries: Entry[],
   highlightEntry: (entry: Entry) => void,
-  unhighlightEntry: () => void
+  unhighlightEntry: () => void,
+  clickEntry: (entry: Entry) => void
 ) {
   return svg`
     <g id="entries">
         ${entries.map(entry =>
-          generateEntryContainer(entry, highlightEntry, unhighlightEntry)
+          generateEntryContainer(
+            entry,
+            highlightEntry,
+            unhighlightEntry,
+            clickEntry
+          )
         )}
     </g>
   `;
