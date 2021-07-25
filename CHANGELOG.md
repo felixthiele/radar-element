@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2021-07-25
+
+### Added
+- optional `clickable` property of entries makes radar-element emit an `entry-click`event, whenever an entry is clicked 
+
+
+### Removed
+- `link` property of entries, please mark entries as `clickable` instead and provide and event-listener instead
+
 ## [1.0.1] - 2021-06-13
 ### Fixed
 - The default color for `--radar-element-section-color` is now black and thus can be seen on the default white background
