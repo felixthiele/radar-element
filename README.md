@@ -1,11 +1,11 @@
 # \<radar-element>
-This web-component shall give users an easy and highly configurable way of creating their own tech-, trend- or ...-radar. 
+This web-component shall give users an easy and highly configurable way of creating their own tech-, trend- or ...-radar.
 
 You may customize the number, styling and name of rings, the number and name of the sections and add entries to those sections. Additionally, your host-application can set the highlighted entry from outside (making the radar-element show a tooltip) and be informed via an event, whenever the user mouses over or clicks an entry.
 
 <p>
   <img src="https://raw.githubusercontent.com/felixthiele/radar-element/main/docs/radar-element.png" width="49%" alt="A TechRadar showing 4 entries in the languages section with a tooltip showing for the entry Kotlin" />
-  <img src="https://raw.githubusercontent.com/felixthiele/radar-element/main/docs/radar-element-dark.png" width="49%" alt="The same radar but in dark mode color palette"/> 
+  <img src="https://raw.githubusercontent.com/felixthiele/radar-element/main/docs/radar-element-dark.png" width="49%" alt="The same radar but in dark mode color palette"/>
 </p>
 
 The web-component follows the [open-wc](https://github.com/open-wc/open-wc) recommendations.
@@ -22,7 +22,7 @@ npm i radar-element
 
 ```html
 <script type="module">
-  import 'radar-element';  
+  import 'radar-element';
 </script>
 
 <radar-element diameter="800"></radar-element>
@@ -73,7 +73,7 @@ export class AppComponent {
   onUnhighlightEntry() {
     ...
   }
- 
+
   onClickEntry() {
     ...
   }
@@ -82,7 +82,7 @@ export class AppComponent {
 
 Next you simple instantiate the element in the HTML and pass the properties / event-bindings:
 ```html
-<radar-element 
+<radar-element
   diameter="800"
   [ringConfigs]="rings"
   [sectionConfigs]="sections"
@@ -152,14 +152,14 @@ The `entryStyle` exhibits the following config-parameters:
 ```json
 {
   "id": "languages",
-  "displayName": "Languages"  
+  "displayName": "Languages"
 }
 ```
 
 | Parameter         | Data-Type     | Description                                                         |
 | ----------------- | ------------- | ------------------------------------------------------------------- |
 | id                | `string`      | The id of the section                                               |
-| displayName       | `string`      | The name of the section that should be displayed                    | 
+| displayName       | `string`      | The name of the section that should be displayed                    |
 
 #### entryConfig (entry-config)
 
@@ -222,8 +222,8 @@ The following css properties can be used to style the radar.
 
 ## Development
 ### Overview
-The whole application is designed to be lightweight and that it must integrate easily in all different kinds of applications. 
-Therefore, we chose the web-components standard for implementation.  
+The whole application is designed to be lightweight and that it must integrate easily in all different kinds of applications.
+Therefore, we chose the web-components standard for implementation.
 
 #### Domain
 When drawing a radar we split the whole circle into different parts, mainly *rings* and *sections*.
@@ -239,7 +239,7 @@ The application is structured as follows:
   /demo
     /index.html - a simple page to integrate the element to for testing purposes
   /src
-    /domain - contains the domain objects 
+    /domain - contains the domain objects
     /generators - contains pure functions that generate SVG or HTML code based on input parameters
     /utils - basic math and svg utilities
     /RadarElements.ts - the backing class for the web component implementation
@@ -249,7 +249,7 @@ The application is structured as follows:
     /radar-element.ts - contains test for the web-component
 /index.ts - the entry point if this whole package is included via npm
 ```
-Some standard files (like `LICENSE`, or `package.json`) are omitted for brevity. 
+Some standard files (like `LICENSE`, or `package.json`) are omitted for brevity.
 
 ### Run locally with with `web-dev-server`
 Install dependencies
@@ -263,37 +263,30 @@ Run the server
 ```bash
 npm start
 ```
+
 This will serve the basic demo located in `demo/index.html`.
 
-### Linting with ESLint, Prettier, and Types
+### Linting and Formatting with ESLint and  Prettier
 To scan the project for linting errors, run
+
 ```bash
 npm run lint
 ```
 
-You can lint with ESLint and Prettier individually as well
-```bash
-npm run lint:eslint
-```
-```bash
-npm run lint:prettier
-```
+To detect formatting errors, run
 
-To automatically fix many linting errors, run
 ```bash
 npm run format
 ```
+And to automatically fix them:
 
-You can format using ESLint and Prettier individually as well
 ```bash
-npm run format:eslint
-```
-```bash
-npm run format:prettier
+npm run format:fix
 ```
 
 ### Testing with `web-test-runner`
 To run the suite of Web Test Runner tests, run
+
 ```bash
 npm run test
 ```
@@ -306,7 +299,15 @@ npm run test:watch
 
 ### Tooling configs
 
-For most of the tools, the configuration is in the `package.json` to reduce the amount of files in your project.
+The configuration for the different tools used in the project are located inside the following files:
+
+- `.eslintrc.cjs` for ESLint config
+- `.editorconfig` for your local editor configuration
+- `.lintstagedrc.json` to run scripts only on git staged files
+- `prettierrc.json` for Prettier config
+- `tsconfig.json` for TypeScript compiler configuration
+- `web-dev-server.config.mjs` for the local development server
+- `web-test-runner.config.mjs` for the local test runner
 
 ## License
 MIT License
