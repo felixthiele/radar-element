@@ -22,7 +22,8 @@
  ** SOFTWARE.
  */
 
-import { css, html, LitElement, property, PropertyValues } from 'lit-element';
+import { css, html, LitElement, PropertyValues } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
 
 import { translate } from './utils/svg.utils';
 import { generateGrid } from './generators/grid-generator';
@@ -55,6 +56,7 @@ export interface EntryConfig {
   clickable?: boolean;
 }
 
+@customElement('radar-element')
 export class RadarElement extends LitElement {
   static styles = css`
     :host {
@@ -142,7 +144,8 @@ export class RadarElement extends LitElement {
   /**
    * The diameter of the radar.
    */
-  @property() diameter = 0;
+  @property({ type: Number })
+  diameter = 0;
 
   /**
    * The configuration for the rings of the radar.
@@ -167,10 +170,13 @@ export class RadarElement extends LitElement {
    */
   @property({ type: Object }) highlightedEntry?: Entry;
 
+  @state()
   private rings: Ring[] = [];
 
+  @state()
   private sections: Section[] = [];
 
+  @state()
   private entries: Entry[] = [];
 
   highlightEntry(entry: Entry) {
@@ -222,50 +228,54 @@ export class RadarElement extends LitElement {
     `;
   }
 
-  protected firstUpdated(_changedProperties: PropertyValues) {
-    super.firstUpdated(_changedProperties);
+  willUpdate(_changedProperties: PropertyValues) {
+    if (
+      _changedProperties.has('ringConfigs') ||
+      _changedProperties.has('sectionConfigs') ||
+      _changedProperties.has('entryConfigs')
+    ) {
+      this.rings = [];
+      this.sections = [];
+      this.entries = [];
 
-    this.rings = [];
-    this.sections = [];
-    this.entries = [];
+      this.ringConfigs.forEach((config, index) => {
+        const ring: Ring = {
+          ...config,
+          radius: computeDefaultRadius(
+            this.diameter - 40,
+            this.ringConfigs.length,
+            index
+          ),
+        };
 
-    this.ringConfigs.forEach((config, index) => {
-      const ring: Ring = {
-        ...config,
-        radius: computeDefaultRadius(
-          this.diameter - 40,
-          this.ringConfigs.length,
-          index
-        ),
-      };
+        if (index > 0) {
+          ring.previousRing = this.rings[index - 1];
+        }
 
-      if (index > 0) {
-        ring.previousRing = this.rings[index - 1];
-      }
-
-      this.rings.push(ring);
-    });
-
-    this.sectionConfigs.forEach((sectionConfig, sectionIndex) => {
-      const section: Section = {
-        ...sectionConfig,
-        radialMin: getRadialMin(this.sectionConfigs.length, sectionIndex),
-        radialMax: getRadialMax(this.sectionConfigs.length, sectionIndex),
-      };
-
-      this.sections.push(section);
-
-      this.rings.forEach(ring => {
-        const segment = new Segment(ring, section);
-
-        this.entryConfigs
-          .filter(e => e.sectionId === sectionConfig.id && e.ringId === ring.id)
-          .sort((a, b) => a.labelLong.localeCompare(b.labelLong))
-          .map(e => segment.generateEntry(e, ring.entryStyle))
-          .forEach(e => this.entries.push(e));
+        this.rings.push(ring);
       });
-    });
 
-    this.update(_changedProperties);
+      this.sectionConfigs.forEach((sectionConfig, sectionIndex) => {
+        const section: Section = {
+          ...sectionConfig,
+          radialMin: getRadialMin(this.sectionConfigs.length, sectionIndex),
+          radialMax: getRadialMax(this.sectionConfigs.length, sectionIndex),
+        };
+
+        this.sections.push(section);
+
+        this.rings.forEach(ring => {
+          const segment = new Segment(ring, section);
+
+          this.entryConfigs
+            .filter(
+              e => e.sectionId === sectionConfig.id && e.ringId === ring.id
+            )
+            .sort((a, b) => a.labelLong.localeCompare(b.labelLong))
+            .map(e => segment.generateEntry(e, ring.entryStyle))
+            .forEach(e => this.entries.push(e));
+        });
+      });
+    }
   }
 }

@@ -22,10 +22,10 @@
  ** SOFTWARE.
  */
 
-import { html, fixture, expect } from '@open-wc/testing';
-
+import { expect, fixture } from '@open-wc/testing';
 import { RadarElement } from '../src/RadarElement';
 import '../index';
+import { html } from 'lit';
 
 describe('RadarElement', () => {
   it('generates basic SVG', async () => {

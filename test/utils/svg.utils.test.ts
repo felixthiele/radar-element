@@ -23,7 +23,6 @@
  */
 
 import { expect } from '@open-wc/testing';
-
 import { generateArc, translate } from '../../src/utils/svg.utils';
 
 describe('translate', () => {

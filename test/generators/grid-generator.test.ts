@@ -22,7 +22,8 @@
  ** SOFTWARE.
  */
 
-import { expect, fixture, html } from '@open-wc/testing';
+import { expect, fixture } from '@open-wc/testing';
+import { html } from 'lit';
 import { generateGrid } from '../../src/generators/grid-generator';
 
 describe('grid generator', () => {

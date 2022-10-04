@@ -22,8 +22,8 @@
  ** SOFTWARE.
  */
 
-import { svg } from 'lit-element';
-import { styleMap } from 'lit-html/directives/style-map';
+import { svg } from 'lit';
+import { styleMap } from 'lit-html/directives/style-map.js';
 import { Entry } from '../domain/entry';
 import { translate } from '../utils/svg.utils';
 

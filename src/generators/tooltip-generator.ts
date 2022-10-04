@@ -22,7 +22,7 @@
  ** SOFTWARE.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { Entry } from '../domain/entry';
 
 export function generateTooltip(entry: Entry, offset: number) {

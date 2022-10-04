@@ -22,7 +22,7 @@
  ** SOFTWARE.
  */
 
-import { svg } from 'lit-element';
+import { svg } from 'lit';
 import { Ring } from '../domain/ring';
 import { Section } from '../domain/section';
 import { toCartesian } from '../utils/math.utils';
