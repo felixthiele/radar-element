@@ -33,7 +33,7 @@ describe('RadarElement', () => {
       html`<radar-element></radar-element>`
     );
 
-    expect(el.shadowRoot!.querySelector('svg')).to.not.be.null;
+    expect(el.shadowRoot?.querySelector('svg')).to.not.be.null;
   });
 
   it('passes the a11y audit', async () => {
