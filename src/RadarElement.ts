@@ -166,9 +166,21 @@ export class RadarElement extends LitElement {
   entryConfigs: Array<EntryConfig> = [];
 
   /**
-   * The currently highlighted entry.
+   * The ID of the currently highlighted entry. Can be set by the user and will
+   * make the element highlight the entry with the given ID. In case the user
+   * moves her mouse over any entry of the radar, this will in turn become the
+   * highlighted entry, which will be reflected in this property.
    */
-  @property({ type: Object }) highlightedEntry?: Entry;
+  @property({ type: String, attribute: 'highlighted-entry-id', reflect: true })
+  highlightedEntryId?: string;
+
+  /**
+   * The currently highlightedEntry. This is computed inside the `willUpdate()`
+   * method based on the `highlightedEntryId`.
+   * @private
+   */
+  @state()
+  private highlightedEntry?: Entry;
 
   @state()
   private rings: Ring[] = [];
@@ -179,31 +191,9 @@ export class RadarElement extends LitElement {
   @state()
   private entries: Entry[] = [];
 
-  highlightEntry(entry: Entry) {
-    this.highlightedEntry = entry;
-    const event = new CustomEvent('entry-mouseover', {
-      detail: {
-        entryId: entry.id,
-      },
-    });
-    this.dispatchEvent(event);
-  }
-
-  unhighlightEntry() {
-    this.highlightedEntry = undefined;
-    const event = new CustomEvent('entry-mouseout');
-    this.dispatchEvent(event);
-  }
-
-  clickEntry(entry: Entry) {
-    const event = new CustomEvent('entry-click', {
-      detail: {
-        entryId: entry.id,
-      },
-    });
-    this.dispatchEvent(event);
-  }
-
+  /**
+   * Renders the html representation of the element.
+   */
   render() {
     return html`
       <svg width="${this.diameter}" height="${this.diameter}">
@@ -228,54 +218,123 @@ export class RadarElement extends LitElement {
     `;
   }
 
+  /**
+   * Called after the properties have been updated but before `render` is called.
+   * Is used to update the internal component state.
+   *
+   * @param _changedProperties a map containing the changed properties together
+   * with their old values
+   */
   willUpdate(_changedProperties: PropertyValues) {
     if (
       _changedProperties.has('ringConfigs') ||
       _changedProperties.has('sectionConfigs') ||
       _changedProperties.has('entryConfigs')
     ) {
-      this.rings = [];
-      this.sections = [];
-      this.entries = [];
-
-      this.ringConfigs.forEach((config, index) => {
-        const ring: Ring = {
-          ...config,
-          radius: computeDefaultRadius(
-            this.diameter - 40,
-            this.ringConfigs.length,
-            index
-          ),
-        };
-
-        if (index > 0) {
-          ring.previousRing = this.rings[index - 1];
-        }
-
-        this.rings.push(ring);
-      });
-
-      this.sectionConfigs.forEach((sectionConfig, sectionIndex) => {
-        const section: Section = {
-          ...sectionConfig,
-          radialMin: getRadialMin(this.sectionConfigs.length, sectionIndex),
-          radialMax: getRadialMax(this.sectionConfigs.length, sectionIndex),
-        };
-
-        this.sections.push(section);
-
-        this.rings.forEach(ring => {
-          const segment = new Segment(ring, section);
-
-          this.entryConfigs
-            .filter(
-              e => e.sectionId === sectionConfig.id && e.ringId === ring.id
-            )
-            .sort((a, b) => a.labelLong.localeCompare(b.labelLong))
-            .map(e => segment.generateEntry(e, ring.entryStyle))
-            .forEach(e => this.entries.push(e));
-        });
-      });
+      this.initializeRadar();
     }
+
+    if (_changedProperties.has('highlightedEntryId')) {
+      this.updateHighlightedEntry();
+    }
+  }
+
+  /**
+   * Initializes the rings, section and entries based on the configuration
+   * provided by the user via properties
+   * @private
+   */
+  private initializeRadar() {
+    this.rings = [];
+    this.sections = [];
+    this.entries = [];
+
+    this.ringConfigs.forEach((config, index) => {
+      const ring: Ring = {
+        ...config,
+        radius: computeDefaultRadius(
+          this.diameter - 40,
+          this.ringConfigs.length,
+          index
+        ),
+      };
+
+      if (index > 0) {
+        ring.previousRing = this.rings[index - 1];
+      }
+
+      this.rings.push(ring);
+    });
+
+    this.sectionConfigs.forEach((sectionConfig, sectionIndex) => {
+      const section: Section = {
+        ...sectionConfig,
+        radialMin: getRadialMin(this.sectionConfigs.length, sectionIndex),
+        radialMax: getRadialMax(this.sectionConfigs.length, sectionIndex),
+      };
+
+      this.sections.push(section);
+
+      this.rings.forEach(ring => {
+        const segment = new Segment(ring, section);
+
+        this.entryConfigs
+          .filter(e => e.sectionId === sectionConfig.id && e.ringId === ring.id)
+          .sort((a, b) => a.labelLong.localeCompare(b.labelLong))
+          .map(e => segment.generateEntry(e, ring.entryStyle))
+          .forEach(e => this.entries.push(e));
+      });
+    });
+  }
+
+  /**
+   * Computes the `highlightedEntry` based on the provided `highlightedEntryId`
+   * @private
+   */
+  private updateHighlightedEntry() {
+    this.highlightedEntry = this.entries.find(
+      e => e.id === this.highlightedEntryId
+    );
+  }
+
+  /**
+   * Used internally to set the `highlightedEntryId` property and to dispatch
+   * an `entry-mouseover`-event.
+   * @param entry the entry to be highlighted
+   * @private
+   */
+  private highlightEntry(entry: Entry) {
+    this.highlightedEntryId = entry.id;
+    const event = new CustomEvent('entry-mouseover', {
+      detail: {
+        entryId: entry.id,
+      },
+    });
+    this.dispatchEvent(event);
+  }
+
+  /**
+   * Used internally to unset the `highlightedEntryId` property and to dispatch
+   * an `entry-mouseout`-event.
+   * @private
+   */
+  private unhighlightEntry() {
+    this.highlightedEntryId = undefined;
+    const event = new CustomEvent('entry-mouseout');
+    this.dispatchEvent(event);
+  }
+
+  /**
+   * Used internally to dispatch an `entry-click`-event.
+   * @param entry the entry that was clicked
+   * @private
+   */
+  private clickEntry(entry: Entry) {
+    const event = new CustomEvent('entry-click', {
+      detail: {
+        entryId: entry.id,
+      },
+    });
+    this.dispatchEvent(event);
   }
 }

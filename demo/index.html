@@ -83,28 +83,28 @@
 
   const entries = [
     {
-      id: "fhdjka",
+      id: "java",
       labelShort: "1",
       labelLong: "Java",
       sectionId: "languages",
       ringId: "adopt",
     },
     {
-      id: "fhdjkadsa",
+      id: "javascript",
       labelShort: "2",
       labelLong: "Typescript / Javascript",
       sectionId: "languages",
       ringId: "adopt",
     },
     {
-      id: "fhdjk321321a",
+      id: "swift",
       labelShort: "3",
       labelLong: "Swift",
       sectionId: "languages",
       ringId: "trial",
     },
     {
-      id: "fhdjkhghgfdha",
+      id: "kotlin",
       labelShort: "4",
       labelLong: "Kotlin",
       sectionId: "languages",
@@ -123,9 +123,23 @@
         @entry-mouseout="${(e) => { window.console.log(e) }}"
         @entry-click="${(e) => { window.console.log(e) }}">
       </radar-element>
+      <button id='highlight'>Highlight Java</button>
+      <button id='unhighlight'>Unhighlight</button>
     `,
     document.querySelector('#demo')
   );
+
+  const highlight = document.getElementById('highlight');
+  highlight.addEventListener('click', function() {
+    const radar = document.getElementsByTagName('radar-element')[0];
+    radar.highlightedEntryId = 'java';
+  });
+
+  const unhighlight = document.getElementById('unhighlight');
+  unhighlight.addEventListener('click', function() {
+    const radar = document.getElementsByTagName('radar-element')[0];
+    radar.highlightedEntryId = undefined;
+  });
 </script>
 </body>
 </html>

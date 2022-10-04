@@ -183,6 +183,11 @@ The `entryStyle` exhibits the following config-parameters:
 | ringId            | `string`      | The id of the ring that entry belongs to                              |
 | clickable         | `boolean`     | Marks the element as clickable making it fire the `entry-click` event |
 
+#### highlightedEntryId (highlighted-entry-id)
+The ID of the entry to be highlighted. You can use this parameter to e.g. programmatically set an entry to the highlighted state. This results in the same state, as if the user would place her mouse on the entry.
+
+If the radar-element itself recognizes a mouse-over by the user on one of its entries, the entries ID is reflected back to this property.
+
 #### entry-mouseover & -mouseout
 The radar-element will fire the `entry-mouseover` event whenever the mouse is placed above on entry and the tooltip appears. The event will contain the following data-structure:
 
