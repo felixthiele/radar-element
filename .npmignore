@@ -1,8 +1,24 @@
+## editors
+/.idea
+/.vscode
+
+## system files
+.DS_Store
+
+## project files
 .github
+.husky
 coverage
 demo
 docs
+src
+!dist/src
 test
 .editorconfig
+.eslintrc.cjs
+.gitignore
+.lintstagedrc.json
+.prettierrc.json
+tsconfig.json
 web-dev-server.config.mjs
 web-test-runner.config.mjs
