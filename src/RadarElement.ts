@@ -58,7 +58,7 @@ export interface EntryConfig {
 
 @customElement('radar-element')
 export class RadarElement extends LitElement {
-  static styles = css`
+  static override styles = css`
     :host {
       display: flex;
     }
@@ -194,7 +194,7 @@ export class RadarElement extends LitElement {
   /**
    * Renders the html representation of the element.
    */
-  render() {
+  override render() {
     return html`
       <svg width="${this.diameter}" height="${this.diameter}">
         <g
@@ -225,7 +225,7 @@ export class RadarElement extends LitElement {
    * @param _changedProperties a map containing the changed properties together
    * with their old values
    */
-  willUpdate(_changedProperties: PropertyValues) {
+  override willUpdate(_changedProperties: PropertyValues) {
     if (
       _changedProperties.has('ringConfigs') ||
       _changedProperties.has('sectionConfigs') ||
