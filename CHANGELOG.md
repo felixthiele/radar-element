@@ -4,9 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2022-10-05
+
+Version 3.0.0 fixes the `highlightedEntry` property, which was not working correctly by replacing it with a `highlightedEntryId`property.
+This, and the fact that the underlying framework for creating this element was replaced, is reflected in this major version increase.
+
+### Changed
+- replaced `highlightedEntry` property by `highlightedEntryId` property, allowing the user to set the highlighted entry from outside
+- replaced `lit-element` by the newer [lit](https://lit.dev) and cleaned up lit lifecycle
+- updated dev-dependencies and typescript compiler to newest versions
+
+### Added
+- GitHub-Workflow for Pull-Requests
+
 ## [2.0.2] - 2022-06-11
 
-### Security 
+### Security
 - updated `minimist` dependency (CVE-2021-44906)
 - updated `semver-regex`dependency (CVE-2021-3795, CVE-2021-43307)
 - updated `node-fetch`dependency (CVE-2022-0235)
@@ -21,7 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.0.0] - 2021-07-25
 
 ### Added
-- optional `clickable` property of entries makes radar-element emit an `entry-click`event, whenever an entry is clicked 
+- optional `clickable` property of entries makes radar-element emit an `entry-click`event, whenever an entry is clicked
 
 
 ### Removed
