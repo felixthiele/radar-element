@@ -61,8 +61,8 @@ function generateEntryContainer(
     <g class="entry" id="entry-${entry.id}" transform="${translate(
     entry.x,
     entry.y
-  )}" @mouseover="${() =>
-    highlightEntry(entry)}" @mouseout="${unhighlightEntry}">
+  )}" @mouseenter="${() =>
+    highlightEntry(entry)}" @mouseleave="${unhighlightEntry}">
         ${generateEntry(entry, clickEntry)}
     </g>
   `;
